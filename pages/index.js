@@ -31,7 +31,6 @@ export default function Homepage() {
     const [mentalBoost, setMentalBoost] = useState(0);
 
     const {
-        days,
         hours,
         minutes,
         seconds,
@@ -142,10 +141,9 @@ export default function Homepage() {
                 <div className={styles.timePassedText}>
                     {view === PROGRESS_VIEW.TIME_PASSED && (
                         <div className={styles.timePassedCount}>
-                            {Math.abs(days) > 0 && `${Math.abs(days)}d `}
-                            {Math.abs(hours) > 0 && `${Math.abs(hours)}h `}
-                            {Math.abs(minutes) > 0 && `${Math.abs(minutes)}min `}
-                            {Math.abs(seconds) > 0 && `${Math.abs(seconds)}sec `}
+                            {Math.abs(hours).toString().padStart(2, '0')}:
+                            {Math.abs(minutes).toString().padStart(2, '0')}:
+                            {Math.abs(seconds).toString().padStart(2, '0')}
                         </div>
                     )}
 

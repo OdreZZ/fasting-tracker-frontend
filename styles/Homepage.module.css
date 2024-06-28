@@ -70,13 +70,13 @@
 }
 
 .timePassedCount {
-    font-size: 26px;
+    font-size: 40px;
     letter-spacing: 1px;
     font-family: 'Lucida Console', Courier, monospace;
 }
 
 .percPassedCount {
-    font-size: 48px;
+    font-size: 40px;
     letter-spacing: 4px;
     font-family: 'Lucida Console', Courier, monospace;
 }

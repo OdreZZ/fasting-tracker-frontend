@@ -5,13 +5,11 @@ export function getTimeDiff(givenDate) {
     const now = moment();
     const totalSeconds = now.diff(givenDate, 'seconds');
 
-    const days = Math.floor(totalSeconds / (24 * 3600));
-    const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
+    const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
 
     return {
-        days,
         hours,
         minutes,
         seconds,
