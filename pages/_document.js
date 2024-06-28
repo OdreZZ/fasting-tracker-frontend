@@ -7,7 +7,7 @@ export default function Document() {
                 <link rel="manifest" href="/manifest.webmanifest" />
                 <script async src="https://unpkg.com/pwacompat" crossOrigin="anonymous"></script>
                 <link rel="apple-touch-icon" href="/icons/icon.png"></link>
-                <meta name="theme-color" content="#1C6758" />
+                <meta name="theme-color" content="#3D8361" />
             </Head>
             <body>
                 <Main />
