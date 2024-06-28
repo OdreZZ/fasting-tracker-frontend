@@ -22,17 +22,17 @@ const PHASES = [{
 }, {
     name: "Late Catabolic",
     startHour: 12,
-    hungerLevel: 80,
+    hungerLevel: 100,
     healthBoost: 60,
     mentalBoost: 25,
     autophagyLevel: 0,
 }, {
     name: "Ketosis",
     startHour: 16,
-    hungerLevel: 100,
+    hungerLevel: 60,
     healthBoost: 60,
     mentalBoost: 50,
-    autophagyLevel: 10,
+    autophagyLevel: 20,
 }, {
     name: "Early Autophagy",
     startHour: 20,

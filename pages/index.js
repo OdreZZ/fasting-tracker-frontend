@@ -9,26 +9,29 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ProgressBar from "@/components/Common/ProgressBar";
 import CircularProgressBar from "@/components/Common/CircularProgressBar";
+import { useRouter } from "next/router";
 
 const PROGRESS_VIEW = {
     TIME_PASSED: "TIME_PASSED",
     PERC_PASSED: "PERC_PASSED",
 };
 
-export default function Homepage() {
+export default function Homepage({ start, end, preventCache }) {
     const { t } = useTranslation();
+    const router = useRouter();
 
     const [view, setView] = useState(PROGRESS_VIEW.TIME_PASSED);
     const [phase, setPhase] = useState(0);
     const [details, setDetails] = useState({});
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date(parseInt(start)));
+    const [endDate, setEndDate] = useState(new Date(parseInt(end)));
     const [timeDiff, setTimeDiff] = useState(getTimeDiff(new Date()));
     const [percentageDone, setPercentageDone] = useState(0);
     const [hungerLevel, setHungerLevel] = useState(0);
     const [autophagyLevel, setAuthophagyLevel] = useState(0);
     const [healthBoost, setHealthBoost] = useState(0);
     const [mentalBoost, setMentalBoost] = useState(0);
+    const [areColonsShown, setAreColonsShown] = useState(true);
 
     const {
         hours,
@@ -49,11 +52,21 @@ export default function Homepage() {
     const updateStartDate = (date) => {
         setStartDate(date);
         updateFastStartingDate(date);
+
+        router.push({
+            pathname: '/',
+            query: { start: date.getTime(), end: endDate.getTime() },
+        });
     }
 
     const updateEndDate = (date) => {
         setEndDate(date);
         updateFastGoalDate(date);
+
+        router.push({
+            pathname: '/',
+            query: { start: startDate.getTime(), end: endDate.getTime() },
+        });
     }
 
     const updateData = () => {
@@ -77,16 +90,17 @@ export default function Homepage() {
         setMentalBoost(newMentalBoost);
         setAuthophagyLevel(newAutophagyLevel);
         setPercentageDone(percentageOfGoal);
+        setAreColonsShown(prev => !prev);
     }
 
     useEffect(() => {
         const cachedStartDate = getFastStartingDate();
         const cachedEndDate = getFastGoalDate();
 
-        if (cachedStartDate) {
+        if (cachedStartDate && !preventCache) {
             setStartDate(new Date(cachedStartDate));
         }
-        if (cachedEndDate) {
+        if (cachedEndDate && !preventCache) {
             setEndDate(new Date(cachedEndDate));
         }
     }, []);
@@ -141,8 +155,10 @@ export default function Homepage() {
                 <div className={styles.timePassedText}>
                     {view === PROGRESS_VIEW.TIME_PASSED && (
                         <div className={styles.timePassedCount}>
-                            {Math.abs(hours).toString().padStart(2, '0')}:
-                            {Math.abs(minutes).toString().padStart(2, '0')}:
+                            {Math.abs(hours).toString().padStart(2, '0')}
+                            {areColonsShown ? ":" : " "}
+                            {Math.abs(minutes).toString().padStart(2, '0')}
+                            {areColonsShown ? ":" : " "}
                             {Math.abs(seconds).toString().padStart(2, '0')}
                         </div>
                     )}
@@ -188,6 +204,19 @@ export default function Homepage() {
     </div>;
 }
 
-Homepage.getInitialProps = async () => {
-    return { pageTitle: "title" };
-};
+export const getServerSideProps = async (context) => {
+    const { query } = context;
+    const currentMilliseconds = (new Date()).getTime();
+    const start = query.start || currentMilliseconds;
+    const end = query.end || currentMilliseconds;
+
+    return {
+        props: {
+            start,
+            end,
+            preventCache: start !== currentMilliseconds || end !== currentMilliseconds,
+            pageTitle: "title",
+        },
+    }
+}
+
