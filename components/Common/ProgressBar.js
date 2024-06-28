@@ -5,10 +5,6 @@ const ProgressBar = ({ title, percentage, color }) => {
     const [isPercentageShown, setIsPercentageShown] = useState(false);
 
     return <div className={styles.progressBarContainer}>
-        <div className={styles.progressBarTitle}>
-            {title}
-        </div>
-
         <div className={styles.progressBar}
             onClick={() => setIsPercentageShown(prev => !prev)}
         >
@@ -19,11 +15,15 @@ const ProgressBar = ({ title, percentage, color }) => {
                 }}
             />
 
-            {isPercentageShown && (
-                <div className={styles.progressBarPercentage}>
-                    {percentage.toFixed(2)}%
-                </div>
-            )}
+            <div className={styles.progressBarText}>
+                {!isPercentageShown && (
+                    <div>{title}</div>
+                )}
+
+                {isPercentageShown && (
+                    <div>{percentage.toFixed(2)}%</div>
+                )}
+            </div>
         </div>
     </div>
 };

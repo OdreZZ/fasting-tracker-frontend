@@ -98,11 +98,11 @@ export default function Homepage() {
 
     return <div className={styles.homepage}>
         <div className={styles.datePickersContainer}>
-            <div className={styles.datePickerContainer}>
-                <div>
-                    Start
-                </div>
+            <div>
+                Start and Goal Dates
+            </div>
 
+            <div className={styles.datePickerContainer}>
                 <div className={styles.datePicker}>
                     <DatePicker
                         className={styles.datePickerInput}
@@ -111,12 +111,6 @@ export default function Homepage() {
                         showTimeSelect
                         dateFormat="Pp"
                     />
-                </div>
-            </div>
-
-            <div className={styles.datePickerContainer}>
-                <div>
-                    Goal
                 </div>
 
                 <div className={styles.datePicker}>
@@ -160,7 +154,7 @@ export default function Homepage() {
 
         <div className={styles.progressBars}>
             <div className={styles.progressBarsTitle}>
-                Phase {phase} | {details.name}
+                {details.name} Phase
             </div>
 
             <ProgressBar
