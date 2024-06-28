@@ -27,6 +27,8 @@ export default function Homepage() {
     const [percentageDone, setPercentageDone] = useState(0);
     const [hungerLevel, setHungerLevel] = useState(0);
     const [autophagyLevel, setAuthophagyLevel] = useState(0);
+    const [healthBoost, setHealthBoost] = useState(0);
+    const [mentalBoost, setMentalBoost] = useState(0);
 
     const {
         days,
@@ -64,12 +66,16 @@ export default function Homepage() {
             phaseDetails,
             percentageOfGoal,
             newHungerLevel,
+            newHealthBoost,
+            newMentalBoost,
             newAutophagyLevel,
         } = getProgressData(startDate, endDate);
 
         setPhase(phase);
         setDetails(phaseDetails);
         setHungerLevel(newHungerLevel);
+        setHealthBoost(newHealthBoost);
+        setMentalBoost(newMentalBoost);
         setAuthophagyLevel(newAutophagyLevel);
         setPercentageDone(percentageOfGoal);
     }
@@ -164,9 +170,21 @@ export default function Homepage() {
             />
 
             <ProgressBar
+                title="Health+"
+                percentage={healthBoost}
+                color="forestgreen"
+            />
+
+            <ProgressBar
+                title="Mental+"
+                percentage={mentalBoost}
+                color="aqua"
+            />
+
+            <ProgressBar
                 title="Autophagy"
                 percentage={autophagyLevel}
-                color="green"
+                color="gold"
             />
         </div>
     </div>;

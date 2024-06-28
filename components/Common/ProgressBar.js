@@ -21,7 +21,7 @@ const ProgressBar = ({ title, percentage, color }) => {
                 )}
 
                 {isPercentageShown && (
-                    <div>{percentage.toFixed(2)}%</div>
+                    <div>{percentage.toFixed(0)}%</div>
                 )}
             </div>
         </div>

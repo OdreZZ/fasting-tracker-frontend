@@ -34,6 +34,8 @@ export function getProgressData(startDate, endDate) {
             },
             percentageOfGoal,
             newHungerLevel: 0,
+            newHealthBoost: 0,
+            newMentalBoost: 0,
             newAutophagyLevel: 0,
         }
     }
@@ -52,6 +54,10 @@ export function getProgressData(startDate, endDate) {
         percentageOfGoal,
         newHungerLevel:
             getMiddlePoint(currentPhase.hungerLevel, hoursInThisPhase, nextPhase.hungerLevel, hoursSinceCurrentPhase),
+        newHealthBoost:
+            getMiddlePoint(currentPhase.healthBoost, hoursInThisPhase, nextPhase.healthBoost, hoursSinceCurrentPhase),
+        newMentalBoost:
+            getMiddlePoint(currentPhase.mentalBoost, hoursInThisPhase, nextPhase.mentalBoost, hoursSinceCurrentPhase),
         newAutophagyLevel:
             getMiddlePoint(currentPhase.autophagyLevel, hoursInThisPhase, nextPhase.autophagyLevel, hoursSinceCurrentPhase),
     }
