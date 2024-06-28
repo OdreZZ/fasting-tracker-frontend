@@ -4,6 +4,7 @@
     overflow: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
 }
 
 .rootContainer::-webkit-scrollbar {
@@ -13,5 +14,5 @@
 .mainContainer {
     display: flex;
     justify-content: center;
-    margin: 12px;
+    margin: 24px 12px;
 }

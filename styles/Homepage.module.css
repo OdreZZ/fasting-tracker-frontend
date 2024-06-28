@@ -1,19 +1,22 @@
 .homepage {
     display: flex;
+    justify-content: space-around;
     flex-direction: column;
     gap: 30px;
     font-size: 24px;
     text-align: center;
     letter-spacing: 4px;
     width: 100%;
+    height: 100%;
     max-width: 600px;
     user-select: none;
+    color: white;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
 }
 
 .datePickersContainer {
     display: flex;
     flex-direction: column;
-    margin: 24px 0;
 }
 
 .datePickerContainer {
@@ -30,6 +33,12 @@
     font-size: 18px;
     text-align: center;
     letter-spacing: 3px;
+    height: 28px;
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .timePassedContainer {
@@ -61,14 +70,14 @@
 
 .timePassedCount {
     font-size: 26px;
-    letter-spacing: 2px;
-    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 1px;
+    font-family: 'Lucida Console', Courier, monospace;
 }
 
 .percPassedCount {
     font-size: 48px;
     letter-spacing: 4px;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Lucida Console', Courier, monospace;
 }
 
 .progressBars {

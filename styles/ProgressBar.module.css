@@ -11,6 +11,7 @@
     height: 28px;
     background-color: #e0e0df;
     border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     overflow: hidden;
     cursor: pointer;
 }
@@ -19,6 +20,7 @@
     height: 28px;
     background-color: #4c2b8b;
     transition: width 0.2s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .progressBarText {
@@ -33,4 +35,5 @@
     font-size: 20px;
     letter-spacing: 2px;
     margin: 0 auto;
+    text-shadow: none;
 }
