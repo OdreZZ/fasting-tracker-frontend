@@ -1,40 +1,50 @@
 const PHASES = [{
+    name: "Anabolic",
     startHour: 0,
     hungerLevel: 0,
     autophagyLevel: 0,
 }, {
+    name: "Early Catabolic",
     startHour: 4,
-    hungerLevel: 0,
+    hungerLevel: 20,
     autophagyLevel: 0,
 }, {
+    name: "Catabolic",
     startHour: 8,
-    hungerLevel: 40,
+    hungerLevel: 60,
     autophagyLevel: 0,
 }, {
+    name: "Late Catabolic",
     startHour: 12,
     hungerLevel: 80,
     autophagyLevel: 0,
 }, {
+    name: "Ketosis",
     startHour: 16,
     hungerLevel: 100,
     autophagyLevel: 10,
 }, {
+    name: "Early Autophagy",
     startHour: 20,
-    hungerLevel: 30,
+    hungerLevel: 20,
     autophagyLevel: 40,
 }, {
+    name: "Autophagy",
     startHour: 24,
-    hungerLevel: 20,
+    hungerLevel: 10,
     autophagyLevel: 60,
 }, {
+    name: "Peak",
     startHour: 28,
-    hungerLevel: 10,
+    hungerLevel: 20,
     autophagyLevel: 80,
 }, {
-    startHour: 100,
+    name: "Starvation",
+    startHour: 48,
     hungerLevel: 100,
     autophagyLevel: 100,
 }, {
+    name: "Dangerous",
     startHour: 1000,
     hungerLevel: 100,
     autophagyLevel: 100,

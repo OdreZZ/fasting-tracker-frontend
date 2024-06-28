@@ -6,6 +6,7 @@
 .mainContainer {
     display: flex;
     justify-content: center;
-    width: 100vw;
+    overflow: auto;
     height: 100vh;
+    margin: 48px 12px;
 }

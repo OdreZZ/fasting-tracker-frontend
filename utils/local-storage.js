@@ -1,4 +1,5 @@
-const FAST_DATE = 'fast_date';
+const FAST_DATE = "fast_date";
+const GOAL_DATE = "goal_date";
 
 export function getFastStartingDate() {
     return getLocalStorageItem(FAST_DATE);
@@ -6,6 +7,14 @@ export function getFastStartingDate() {
 
 export function updateFastStartingDate(startingDate) {
     setLocalStorageItem(FAST_DATE, startingDate);
+};
+
+export function getFastGoalDate() {
+    return getLocalStorageItem(GOAL_DATE);
+};
+
+export function updateFastGoalDate(endDate) {
+    setLocalStorageItem(GOAL_DATE, endDate);
 };
 
 

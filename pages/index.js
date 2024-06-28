@@ -2,18 +2,29 @@ import { useTranslation } from "react-i18next";
 
 import { useEffect, useState } from "react";
 import { getProgressData, getTimeDiff } from "@/utils/date-calculations";
-import { getFastStartingDate, updateFastStartingDate } from "@/utils/local-storage";
+import { getFastGoalDate, getFastStartingDate, updateFastGoalDate, updateFastStartingDate } from "@/utils/local-storage";
 import styles from "../styles/Homepage.module.css";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ProgressBar from "@/components/Common/ProgressBar";
+import CircularProgressBar from "@/components/Common/CircularProgressBar";
+
+const PROGRESS_VIEW = {
+    TIME_PASSED: "TIME_PASSED",
+    PERC_PASSED: "PERC_PASSED",
+};
 
 export default function Homepage() {
     const { t } = useTranslation();
 
+    const [view, setView] = useState(PROGRESS_VIEW.TIME_PASSED);
+    const [phase, setPhase] = useState(0);
+    const [details, setDetails] = useState({});
     const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
     const [timeDiff, setTimeDiff] = useState(getTimeDiff(new Date()));
+    const [percentageDone, setPercentageDone] = useState(0);
     const [hungerLevel, setHungerLevel] = useState(0);
     const [autophagyLevel, setAuthophagyLevel] = useState(0);
 
@@ -24,9 +35,24 @@ export default function Homepage() {
         seconds,
     } = timeDiff;
 
+    const toggleView = () => {
+        setView(prev => {
+            if (prev === PROGRESS_VIEW.TIME_PASSED) {
+                return PROGRESS_VIEW.PERC_PASSED;
+            } else if (prev === PROGRESS_VIEW.PERC_PASSED) {
+                return PROGRESS_VIEW.TIME_PASSED;
+            }
+        });
+    }
+
     const updateStartDate = (date) => {
         setStartDate(date);
         updateFastStartingDate(date);
+    }
+
+    const updateEndDate = (date) => {
+        setEndDate(date);
+        updateFastGoalDate(date);
     }
 
     const updateData = () => {
@@ -35,19 +61,28 @@ export default function Homepage() {
 
         const {
             phase,
+            phaseDetails,
+            percentageOfGoal,
             newHungerLevel,
             newAutophagyLevel,
-        } = getProgressData(startDate);
+        } = getProgressData(startDate, endDate);
 
+        setPhase(phase);
+        setDetails(phaseDetails);
         setHungerLevel(newHungerLevel);
         setAuthophagyLevel(newAutophagyLevel);
+        setPercentageDone(percentageOfGoal);
     }
 
     useEffect(() => {
         const cachedStartDate = getFastStartingDate();
+        const cachedEndDate = getFastGoalDate();
 
         if (cachedStartDate) {
             setStartDate(new Date(cachedStartDate));
+        }
+        if (cachedEndDate) {
+            setEndDate(new Date(cachedEndDate));
         }
     }, []);
 
@@ -59,43 +94,83 @@ export default function Homepage() {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [startDate]);
+    }, [startDate, endDate]);
 
     return <div className={styles.homepage}>
-        <div>
-            Start of Fast:
+        <div className={styles.datePickersContainer}>
+            <div className={styles.datePickerContainer}>
+                <div>
+                    Start
+                </div>
+
+                <div className={styles.datePicker}>
+                    <DatePicker
+                        className={styles.datePickerInput}
+                        selected={startDate}
+                        onChange={updateStartDate}
+                        showTimeSelect
+                        dateFormat="Pp"
+                    />
+                </div>
+            </div>
+
+            <div className={styles.datePickerContainer}>
+                <div>
+                    Goal
+                </div>
+
+                <div className={styles.datePicker}>
+                    <DatePicker
+                        className={styles.datePickerInput}
+                        selected={endDate}
+                        onChange={updateEndDate}
+                        showTimeSelect
+                        dateFormat="Pp"
+                    />
+                </div>
+            </div>
         </div>
 
-        <DatePicker
-            className={styles.datePicker}
-            selected={startDate}
-            onChange={updateStartDate}
-            showTimeSelect
-            dateFormat="Pp"
-        />
+        <div className={styles.timePassedContainer}>
+            <CircularProgressBar
+                percentage={percentageDone}
+            />
 
-        <div className={styles.timePassed}>
-            {seconds >= 0 ? "Time Passed:" : "Time until Fast:"}
+            <div className={styles.timePassed}
+                onClick={toggleView}
+            >
+                <div className={styles.timePassedText}>
+                    {view === PROGRESS_VIEW.TIME_PASSED && (
+                        <div className={styles.timePassedCount}>
+                            {Math.abs(days) > 0 && `${Math.abs(days)}d `}
+                            {Math.abs(hours) > 0 && `${Math.abs(hours)}h `}
+                            {Math.abs(minutes) > 0 && `${Math.abs(minutes)}min `}
+                            {Math.abs(seconds) > 0 && `${Math.abs(seconds)}sec `}
+                        </div>
+                    )}
 
-            <br />
-
-            <div className={styles.timePassedCount}>
-                {days > 0 && `${Math.abs(days)}d `}
-                {hours > 0 && `${Math.abs(hours)}h `}
-                {minutes > 0 && `${Math.abs(minutes)}min `}
-                {seconds > 0 && `${Math.abs(seconds)}sec `}
+                    {view === PROGRESS_VIEW.PERC_PASSED && (
+                        <div className={styles.percPassedCount}>
+                            {percentageDone.toFixed(2)}%
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
 
         <div className={styles.progressBars}>
+            <div className={styles.progressBarsTitle}>
+                Phase {phase} | {details.name}
+            </div>
+
             <ProgressBar
-                title="Hunger Level:"
+                title="Hunger"
                 percentage={hungerLevel}
                 color="red"
             />
 
             <ProgressBar
-                title="Autophagy Level:"
+                title="Autophagy"
                 percentage={autophagyLevel}
                 color="green"
             />

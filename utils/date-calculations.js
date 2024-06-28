@@ -18,13 +18,21 @@ export function getTimeDiff(givenDate) {
     }
 }
 
-export function getProgressData(givenDate) {
+export function getProgressData(startDate, endDate) {
     const now = moment();
-    const hoursPassed = now.diff(givenDate, 'minutes') / 60.0;
+    const start = moment(startDate);
+    const end = moment(endDate);
+
+    const hoursPassed = now.diff(start, 'minutes') / 60.0;
+    const percentageOfGoal = Math.min(Math.max(100.0 * now.diff(start) / end.diff(start), 0), 100);
     const currentPhaseIdx = PHASES.findIndex(phase => hoursPassed < phase.startHour) - 1;
     if (currentPhaseIdx < 0) {
         return {
             phase: 0,
+            phaseDetails: {
+                name: "",
+            },
+            percentageOfGoal,
             newHungerLevel: 0,
             newAutophagyLevel: 0,
         }
@@ -38,6 +46,10 @@ export function getProgressData(givenDate) {
 
     return {
         phase: currentPhaseIdx + 1,
+        phaseDetails: {
+            name: currentPhase.name,
+        },
+        percentageOfGoal,
         newHungerLevel:
             getMiddlePoint(currentPhase.hungerLevel, hoursInThisPhase, nextPhase.hungerLevel, hoursSinceCurrentPhase),
         newAutophagyLevel:
