@@ -1,12 +1,17 @@
 .rootContainer {
     width: 100vw;
     height: 100vh;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.rootContainer::-webkit-scrollbar {
+    display: none;
 }
 
 .mainContainer {
     display: flex;
     justify-content: center;
-    overflow: auto;
-    height: 100vh;
     margin: 48px 12px;
 }
