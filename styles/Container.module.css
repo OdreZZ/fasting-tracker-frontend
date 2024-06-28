@@ -4,7 +4,7 @@
     overflow: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    background-image: linear-gradient( 109.6deg,  rgba(61,131,97,1) 11.2%, rgba(28,103,88,1) 91.1% );
+    background-color: #3D8361;
 }
 
 .rootContainer::-webkit-scrollbar {
