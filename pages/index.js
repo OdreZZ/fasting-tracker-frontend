@@ -197,24 +197,6 @@ export default function Homepage({ start, end, preventCache }) {
             />
 
             <ProgressBar
-                title="Health+"
-                percentage={healthBoost}
-                color="forestgreen"
-            />
-
-            <ProgressBar
-                title="Mental+"
-                percentage={mentalBoost}
-                color="aqua"
-            />
-
-            <ProgressBar
-                title="Autophagy"
-                percentage={autophagyLevel}
-                color="gold"
-            />
-
-            <ProgressBar
                 title="Nicotine Craving"
                 percentage={nicotineCraving}
                 color="orange"
@@ -230,6 +212,24 @@ export default function Homepage({ start, end, preventCache }) {
                 title="Irritability"
                 percentage={irritabilityLevel}
                 color="orange"
+            />
+
+            <ProgressBar
+                title="Health+"
+                percentage={healthBoost}
+                color="forestgreen"
+            />
+
+            <ProgressBar
+                title="Mental+"
+                percentage={mentalBoost}
+                color="aqua"
+            />
+
+            <ProgressBar
+                title="Autophagy"
+                percentage={autophagyLevel}
+                color="gold"
             />
         </div>
     </div>;
