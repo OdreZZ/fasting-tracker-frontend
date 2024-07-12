@@ -5,6 +5,9 @@ const PHASES = [{
     healthBoost: 0,
     mentalBoost: 0,
     autophagyLevel: 0,
+    nicotineCraving: 0,
+    nicotineInBlood: 100,
+    irritabilityLevel: 0,
 }, {
     name: "Early Catabolic",
     startHour: 4,
@@ -12,6 +15,9 @@ const PHASES = [{
     healthBoost: 15,
     mentalBoost: 5,
     autophagyLevel: 0,
+    nicotineCraving: 60,
+    nicotineInBlood: 90,
+    irritabilityLevel: 10,
 }, {
     name: "Catabolic",
     startHour: 8,
@@ -19,6 +25,9 @@ const PHASES = [{
     healthBoost: 40,
     mentalBoost: 15,
     autophagyLevel: 0,
+    nicotineCraving: 80,
+    nicotineInBlood: 80,
+    irritabilityLevel: 30,
 }, {
     name: "Late Catabolic",
     startHour: 12,
@@ -26,6 +35,9 @@ const PHASES = [{
     healthBoost: 60,
     mentalBoost: 25,
     autophagyLevel: 0,
+    nicotineCraving: 100,
+    nicotineInBlood: 70,
+    irritabilityLevel: 80,
 }, {
     name: "Ketosis",
     startHour: 16,
@@ -33,6 +45,9 @@ const PHASES = [{
     healthBoost: 60,
     mentalBoost: 50,
     autophagyLevel: 20,
+    nicotineCraving: 80,
+    nicotineInBlood: 60,
+    irritabilityLevel: 70,
 }, {
     name: "Early Autophagy",
     startHour: 20,
@@ -40,6 +55,9 @@ const PHASES = [{
     healthBoost: 60,
     mentalBoost: 75,
     autophagyLevel: 40,
+    nicotineCraving: 50,
+    nicotineInBlood: 50,
+    irritabilityLevel: 30,
 }, {
     name: "Autophagy",
     startHour: 24,
@@ -47,6 +65,9 @@ const PHASES = [{
     healthBoost: 80,
     mentalBoost: 100,
     autophagyLevel: 60,
+    nicotineCraving: 30,
+    nicotineInBlood: 40,
+    irritabilityLevel: 20,
 }, {
     name: "Peak",
     startHour: 28,
@@ -54,6 +75,9 @@ const PHASES = [{
     healthBoost: 100,
     mentalBoost: 100,
     autophagyLevel: 80,
+    nicotineCraving: 20,
+    nicotineInBlood: 30,
+    irritabilityLevel: 10,
 }, {
     name: "Starvation",
     startHour: 72,
@@ -61,6 +85,9 @@ const PHASES = [{
     healthBoost: 10,
     mentalBoost: 100,
     autophagyLevel: 100,
+    nicotineCraving: 0,
+    nicotineInBlood: 0,
+    irritabilityLevel: 0,
 }, {
     name: "Dangerous",
     startHour: 100,
@@ -68,6 +95,9 @@ const PHASES = [{
     healthBoost: 0,
     mentalBoost: 0,
     autophagyLevel: 100,
+    nicotineCraving: 0,
+    nicotineInBlood: 0,
+    irritabilityLevel: 0,
 }, {
     name: "Dangerous",
     startHour: 1000,
@@ -75,6 +105,9 @@ const PHASES = [{
     healthBoost: 0,
     mentalBoost: 0,
     autophagyLevel: 100,
+    nicotineCraving: 0,
+    nicotineInBlood: 0,
+    irritabilityLevel: 0,
 }];
 
 export default PHASES;

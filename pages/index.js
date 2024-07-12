@@ -31,7 +31,11 @@ export default function Homepage({ start, end, preventCache }) {
     const [autophagyLevel, setAuthophagyLevel] = useState(0);
     const [healthBoost, setHealthBoost] = useState(0);
     const [mentalBoost, setMentalBoost] = useState(0);
+    const [nicotineCraving, setNicotineCraving] = useState(0);
+    const [nicotineInBlood, setNicotineInBlood] = useState(0);
+    const [irritabilityLevel, setIrritabilityLevel] = useState(0);
     const [areColonsShown, setAreColonsShown] = useState(true);
+    const [areDatesShown, setAreDatesShown] = useState(false);
 
     const {
         hours,
@@ -40,6 +44,7 @@ export default function Homepage({ start, end, preventCache }) {
     } = timeDiff;
 
     const toggleView = () => {
+        setAreDatesShown(prev => !prev);
         setView(prev => {
             if (prev === PROGRESS_VIEW.TIME_PASSED) {
                 return PROGRESS_VIEW.PERC_PASSED;
@@ -81,6 +86,9 @@ export default function Homepage({ start, end, preventCache }) {
             newHealthBoost,
             newMentalBoost,
             newAutophagyLevel,
+            newNicotineCraving,
+            newNicotineInBlood,
+            newIrritabilityLevel,
         } = getProgressData(startDate, endDate);
 
         setPhase(phase);
@@ -90,6 +98,9 @@ export default function Homepage({ start, end, preventCache }) {
         setMentalBoost(newMentalBoost);
         setAuthophagyLevel(newAutophagyLevel);
         setPercentageDone(percentageOfGoal);
+        setNicotineCraving(newNicotineCraving);
+        setNicotineInBlood(newNicotineInBlood);
+        setIrritabilityLevel(newIrritabilityLevel);
         setAreColonsShown(prev => !prev);
     }
 
@@ -116,33 +127,35 @@ export default function Homepage({ start, end, preventCache }) {
     }, [startDate, endDate]);
 
     return <div className={styles.homepage}>
-        <div className={styles.datePickersContainer}>
-            <div>
-                Start and Goal Dates
-            </div>
-
-            <div className={styles.datePickerContainer}>
-                <div className={styles.datePicker}>
-                    <DatePicker
-                        className={styles.datePickerInput}
-                        selected={startDate}
-                        onChange={updateStartDate}
-                        showTimeSelect
-                        dateFormat="Pp"
-                    />
+        {areDatesShown && (
+            <div className={styles.datePickersContainer}>
+                <div>
+                    Start and Goal Dates
                 </div>
 
-                <div className={styles.datePicker}>
-                    <DatePicker
-                        className={styles.datePickerInput}
-                        selected={endDate}
-                        onChange={updateEndDate}
-                        showTimeSelect
-                        dateFormat="Pp"
-                    />
+                <div className={styles.datePickerContainer}>
+                    <div className={styles.datePicker}>
+                        <DatePicker
+                            className={styles.datePickerInput}
+                            selected={startDate}
+                            onChange={updateStartDate}
+                            showTimeSelect
+                            dateFormat="Pp"
+                        />
+                    </div>
+
+                    <div className={styles.datePicker}>
+                        <DatePicker
+                            className={styles.datePickerInput}
+                            selected={endDate}
+                            onChange={updateEndDate}
+                            showTimeSelect
+                            dateFormat="Pp"
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+        )}
 
         <div className={styles.timePassedContainer}>
             <CircularProgressBar
@@ -180,7 +193,7 @@ export default function Homepage({ start, end, preventCache }) {
             <ProgressBar
                 title="Hunger"
                 percentage={hungerLevel}
-                color="red"
+                color="orange"
             />
 
             <ProgressBar
@@ -199,6 +212,24 @@ export default function Homepage({ start, end, preventCache }) {
                 title="Autophagy"
                 percentage={autophagyLevel}
                 color="gold"
+            />
+
+            <ProgressBar
+                title="Nicotine Craving"
+                percentage={nicotineCraving}
+                color="orange"
+            />
+
+            <ProgressBar
+                title="Nicotine in Blood"
+                percentage={nicotineInBlood}
+                color="red"
+            />
+
+            <ProgressBar
+                title="Irritability"
+                percentage={irritabilityLevel}
+                color="orange"
             />
         </div>
     </div>;

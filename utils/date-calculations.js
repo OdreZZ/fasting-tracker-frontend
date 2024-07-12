@@ -35,6 +35,9 @@ export function getProgressData(startDate, endDate) {
             newHealthBoost: 0,
             newMentalBoost: 0,
             newAutophagyLevel: 0,
+            newNicotineCraving: 0,
+            newNicotineInBlood: 0,
+            newIrritabilityLevel: 0,
         }
     }
 
@@ -58,6 +61,12 @@ export function getProgressData(startDate, endDate) {
             getMiddlePoint(currentPhase.mentalBoost, hoursInThisPhase, nextPhase.mentalBoost, hoursSinceCurrentPhase),
         newAutophagyLevel:
             getMiddlePoint(currentPhase.autophagyLevel, hoursInThisPhase, nextPhase.autophagyLevel, hoursSinceCurrentPhase),
+        newNicotineCraving:
+            getMiddlePoint(currentPhase.nicotineCraving, hoursInThisPhase, nextPhase.nicotineCraving, hoursSinceCurrentPhase),
+        newNicotineInBlood:
+            getMiddlePoint(currentPhase.nicotineInBlood, hoursInThisPhase, nextPhase.nicotineInBlood, hoursSinceCurrentPhase),
+        newIrritabilityLevel:
+            getMiddlePoint(currentPhase.irritabilityLevel, hoursInThisPhase, nextPhase.irritabilityLevel, hoursSinceCurrentPhase),
     }
 }
 
