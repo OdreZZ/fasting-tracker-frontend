@@ -1,0 +1,18 @@
+.checkbox {
+    cursor: pointer;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-shadow: none;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    color: rgb(255, 255, 255, 0.3);
+}
+
+.active {
+    color: white;
+}
+
+.checkbox input {
+    font-size: 18px;
+}

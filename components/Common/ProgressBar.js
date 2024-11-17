@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../styles/ProgressBar.module.css";
 
-const ProgressBar = ({ title, percentage, color }) => {
+const ProgressBar = ({ title, percentage, color, icon }) => {
     return <div className={styles.progressBarContainer}>
         <div className={styles.progressBar}>
             <div className={styles.progressBarFill}
@@ -12,7 +12,7 @@ const ProgressBar = ({ title, percentage, color }) => {
             />
 
             <div className={styles.progressBarText}>
-                <div>{title}</div>
+                <div className={styles.progressBarTitle}>{icon} {title}</div>
 
                 <div>{percentage.toFixed(0)}%</div>
             </div>
