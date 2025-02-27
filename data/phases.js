@@ -49,7 +49,7 @@ const PHASES = [{
     nicotineInBlood: 60,
     irritabilityLevel: 70,
 }, {
-    name: "Early Autophagy",
+    name: "Early Autophagic",
     startHour: 20,
     hungerLevel: 70,
     healthBoost: 60,
@@ -59,7 +59,7 @@ const PHASES = [{
     nicotineInBlood: 50,
     irritabilityLevel: 30,
 }, {
-    name: "Autophagy",
+    name: "Autophagic",
     startHour: 24,
     hungerLevel: 10,
     healthBoost: 80,
@@ -69,7 +69,7 @@ const PHASES = [{
     nicotineInBlood: 40,
     irritabilityLevel: 20,
 }, {
-    name: "Peak",
+    name: "Peak!",
     startHour: 28,
     hungerLevel: 20,
     healthBoost: 100,
@@ -79,7 +79,7 @@ const PHASES = [{
     nicotineInBlood: 30,
     irritabilityLevel: 10,
 }, {
-    name: "Starvation",
+    name: "Starvation!",
     startHour: 72,
     hungerLevel: 100,
     healthBoost: 10,
@@ -89,7 +89,7 @@ const PHASES = [{
     nicotineInBlood: 0,
     irritabilityLevel: 0,
 }, {
-    name: "Dangerous",
+    name: "Dangerous!!",
     startHour: 100,
     hungerLevel: 100,
     healthBoost: 0,
@@ -99,7 +99,7 @@ const PHASES = [{
     nicotineInBlood: 0,
     irritabilityLevel: 0,
 }, {
-    name: "Dangerous",
+    name: "Dangerous!!!",
     startHour: 1000,
     hungerLevel: 100,
     healthBoost: 0,

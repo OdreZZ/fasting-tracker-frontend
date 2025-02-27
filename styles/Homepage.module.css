@@ -3,7 +3,7 @@
     justify-content: space-around;
     flex-direction: column;
     gap: 30px;
-    font-size: 24px;
+    font-size: 36px;
     text-align: center;
     letter-spacing: 4px;
     width: 100%;
@@ -96,8 +96,9 @@
 }
 
 .progressBarsTitle {
-    font-size: 24px;
+    font-size: 32px;
     letter-spacing: 4px;
+    margin-bottom: 8px;
 }
 
 .optionsContainer {

@@ -17,7 +17,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import ProgressBar from "@/components/Common/ProgressBar";
 import CircularProgressBar from "@/components/Common/CircularProgressBar";
 import { useRouter } from "next/router";
-import { CrisisAlert, HealthAndSafety, NoMeals, Opacity, Psychology, SelfImprovement, SmokeFree } from "@mui/icons-material";
 import Checkbox from "@/components/Common/CheckBox";
 
 const PROGRESS_VIEW = {
@@ -281,7 +280,16 @@ export default function Homepage({ start, end, preventCache }) {
                         title="Hunger"
                         percentage={hungerLevel}
                         color="orange"
-                        icon={<NoMeals />}
+                        iconPng="hunger.png"
+                    />
+                )}
+
+                {showFoodStats && (
+                    <ProgressBar
+                        title="Autophagy"
+                        percentage={autophagyLevel}
+                        color="cyan"
+                        iconPng="autophagy.png"
                     />
                 )}
 
@@ -290,7 +298,7 @@ export default function Homepage({ start, end, preventCache }) {
                         title="Nicotine Craving"
                         percentage={nicotineCraving}
                         color="orange"
-                        icon={<SmokeFree />}
+                        iconPng="nicotine_craving.png"
                     />
                 )}
 
@@ -299,7 +307,7 @@ export default function Homepage({ start, end, preventCache }) {
                         title="Nicotine in Blood"
                         percentage={nicotineInBlood}
                         color="red"
-                        icon={<Opacity />}
+                        iconPng="nicotine_blood.png"
                     />
                 )}
 
@@ -308,34 +316,25 @@ export default function Homepage({ start, end, preventCache }) {
                         title="Irritability"
                         percentage={irritabilityLevel}
                         color="orange"
-                        icon={<CrisisAlert />}
+                        iconPng="irritability.png"
                     />
                 )}
 
-                {showFoodStats && showTobaccoStats && (
+                {(showFoodStats || showTobaccoStats) && (
                     <ProgressBar
                         title="Health+"
                         percentage={healthBoost}
                         color="forestgreen"
-                        icon={<HealthAndSafety />}
+                        iconPng="health_plus.png"
                     />
                 )}
 
-                {showFoodStats && showTobaccoStats && (
+                {(showFoodStats || showTobaccoStats) && (
                     <ProgressBar
                         title="Mental+"
                         percentage={mentalBoost}
                         color="aqua"
-                        icon={<Psychology />}
-                    />
-                )}
-
-                {showFoodStats && (
-                    <ProgressBar
-                        title="Autophagy"
-                        percentage={autophagyLevel}
-                        color="gold"
-                        icon={<SelfImprovement />}
+                        iconPng="mental_plus.png"
                     />
                 )}
             </div>
