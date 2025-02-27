@@ -61,7 +61,7 @@ const PHASES = [{
 }, {
     name: "Autophagic",
     startHour: 24,
-    hungerLevel: 10,
+    hungerLevel: 40,
     healthBoost: 80,
     mentalBoost: 100,
     autophagyLevel: 60,
@@ -71,7 +71,7 @@ const PHASES = [{
 }, {
     name: "Peak!",
     startHour: 28,
-    hungerLevel: 20,
+    hungerLevel: 10,
     healthBoost: 100,
     mentalBoost: 100,
     autophagyLevel: 80,
