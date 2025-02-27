@@ -1,5 +1,6 @@
 const FAST_DATE = "fast_date";
 const GOAL_DATE = "goal_date";
+const SETTINGS = "settings";
 
 export function getFastStartingDate() {
     return getLocalStorageItem(FAST_DATE);
@@ -17,6 +18,13 @@ export function updateFastGoalDate(endDate) {
     setLocalStorageItem(GOAL_DATE, endDate);
 };
 
+export function getCachedSettings() {
+    return getLocalStorageItem(SETTINGS);
+};
+
+export function updateCachedSettings(settings) {
+    setLocalStorageItem(SETTINGS, settings);
+};
 
 function getLocalStorageItem(key, defaultValue=false) {
     if (typeof window !== 'undefined') {

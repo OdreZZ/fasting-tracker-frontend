@@ -2,7 +2,14 @@ import { useTranslation } from "react-i18next";
 
 import { useEffect, useState } from "react";
 import { getProgressData, getTimeDiff } from "@/utils/date-calculations";
-import { getFastGoalDate, getFastStartingDate, updateFastGoalDate, updateFastStartingDate } from "@/utils/local-storage";
+import { 
+    getCachedSettings,
+    getFastGoalDate,
+    getFastStartingDate,
+    updateCachedSettings,
+    updateFastGoalDate,
+    updateFastStartingDate,
+} from "@/utils/local-storage";
 import styles from "../styles/Homepage.module.css";
 
 import DatePicker from "react-datepicker";
@@ -125,15 +132,35 @@ export default function Homepage({ start, end, preventCache }) {
         setAreColonsShown(prev => !prev);
     }
 
+    const updateSettings = ({ showFood, showTobacco }) => {
+        const settings = {
+            showFoodStats: showFood !== undefined ? showFood : showFoodStats,
+            showTobaccoStats: showTobacco !== undefined ? showTobacco : showTobaccoStats,
+        };
+
+        updateCachedSettings(settings);
+        setShowFoodStats(settings.showFoodStats);
+        setShowTobaccoStats(settings.showTobaccoStats);
+    }
+
     useEffect(() => {
         const cachedStartDate = getFastStartingDate();
         const cachedEndDate = getFastGoalDate();
+        const cachedSettings = getCachedSettings();
 
         if (cachedStartDate && !preventCache) {
             setStartDate(new Date(cachedStartDate));
         }
         if (cachedEndDate && !preventCache) {
             setEndDate(new Date(cachedEndDate));
+        }
+        if (cachedSettings) {
+            if (cachedSettings.showFoodStats !== undefined) {
+                setShowFoodStats(cachedSettings.showFoodStats);
+            }
+            if (cachedSettings.showTobaccoStats !== undefined) {
+                setShowTobaccoStats(cachedSettings.showTobaccoStats);
+            }
         }
     }, []);
 
@@ -216,13 +243,13 @@ export default function Homepage({ start, end, preventCache }) {
                     <Checkbox
                         label="Show Food Stats"
                         isChecked={showFoodStats}
-                        onChange={() => setShowFoodStats(prev => !prev)}
+                        onChange={() => updateSettings({ showFood: !showFoodStats })}
                     />
 
                     <Checkbox
                         label="Show Tobacco Stats"
                         isChecked={showTobaccoStats}
-                        onChange={() => setShowTobaccoStats(prev => !prev)}
+                        onChange={() => updateSettings({ showTobacco: !showTobaccoStats })}
                     />
                 </div>
 
