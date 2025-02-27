@@ -24,6 +24,7 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    width: 100%;
 }
 
 .datePickerContainer {
@@ -37,11 +38,16 @@
     text-shadow: none;
 }
 
+.datePicker div {
+    width: 100%;
+}
+
 .datePickerInput {
-    font-size: 18px;
+    font-size: 22px;
     text-align: center;
     letter-spacing: 3px;
-    height: 28px;
+    width: 100%;
+    height: 48px;
     background-color: white;
     color: black;
     border-radius: 4px;
@@ -96,7 +102,7 @@
 }
 
 .progressBarsTitle {
-    font-size: 32px;
+    font-size: 36px;
     letter-spacing: 4px;
     margin-bottom: 8px;
 }
@@ -112,7 +118,7 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    width: 274px;
+    width: 100%;
     align-items: start;
 }
 
@@ -126,18 +132,19 @@
     gap: 5px;
     justify-content: center;
     align-items: center;
-    width: 274px;
+    width: 100%;
 }
 
 .actionsContainer button {
     padding: 8px 24px;
-    font-size: 16px;
-    letter-spacing: 2px;
-    background-color: darkgreen;
+    font-size: 20px;
+    letter-spacing: 4px;
+    background-color: darkblue;
     outline: none;
     border: none;
     border-radius: 6px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     cursor: pointer;
-    width: 274px;
+    width: 100%;
+    height: 48px;
 }
