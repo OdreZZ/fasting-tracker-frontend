@@ -29,6 +29,7 @@ export default function Homepage({ start, end, preventCache }) {
     const { t } = useTranslation();
     const router = useRouter();
 
+    const [isLoading, setIsLoading] = useState(true);
     const [view, setView] = useState(PROGRESS_VIEW.TIME_PASSED);
     const [phase, setPhase] = useState(0);
     const [details, setDetails] = useState({});
@@ -162,6 +163,8 @@ export default function Homepage({ start, end, preventCache }) {
                 setShowTobaccoStats(cachedSettings.showTobaccoStats);
             }
         }
+
+        setIsLoading(false);
     }, []);
 
     useEffect(() => {
@@ -173,6 +176,10 @@ export default function Homepage({ start, end, preventCache }) {
 
         return () => clearInterval(interval);
     }, [startDate, endDate]);
+
+    if (isLoading) {
+        return null;
+    }
 
     return <div className={styles.homepage}>
         <h2 className={styles.homepageTitle}>Fasting Tracker</h2>
