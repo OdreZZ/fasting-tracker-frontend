@@ -4,7 +4,7 @@ export default function Document() {
     return (
         <Html lang="en">
             <Head>
-                <meta name="theme-color" content="#3D8361" />
+                <meta name="theme-color" content="#0F52BA" />
                 <link rel="apple-touch-icon" href="/icons/icon.png"></link>
                 <link rel="manifest" href="/manifest.webmanifest" />
                 <script
@@ -12,7 +12,7 @@ export default function Document() {
                         __html: `
                             window.pwacompat = {
                                 manifest: '/manifest.webmanifest',
-                                background_color: '#3D8361'
+                                background_color: '#0F52BA'
                             };
                             if (('standalone' in navigator) && (!navigator.standalone)) {
                                 import('https://unpkg.com/pwacompat');
