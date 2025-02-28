@@ -39,14 +39,12 @@
     margin: 0 auto;
     text-shadow: none;
     padding: 0px 12px;
-    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 .progressBarTitle {
     display: flex;
     gap: 8px;
     align-items: center;
-    text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 .progressBarIcon {
