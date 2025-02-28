@@ -4,6 +4,10 @@ import "../../config/i18n";
 import Head from "next/head";
 import styles from "../../styles/Container.module.css";
 import { useTranslation } from "react-i18next";
+import localFont from "next/font/local";
+import classNames from "classnames";
+ 
+const ffFont = localFont({ src: "../../fonts/FFXIVAppIcons.ttf" });
 
 export default function MainContainer({
     title,
@@ -12,7 +16,7 @@ export default function MainContainer({
     const { t } = useTranslation();
 
     return (
-        <div className={styles.rootContainer}>
+        <div className={classNames(styles.rootContainer, ffFont.className)}>
             <Head>
                 <title>{t(title)}</title>
                 <link rel="icon" href="/favicon.ico" />
