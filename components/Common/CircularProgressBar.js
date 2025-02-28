@@ -7,7 +7,7 @@ export default function CircularProgressBar({ percentage }) {
         <CircularProgressbar
             value={percentage}
             styles={buildStyles({
-                pathColor: 'orange',
+                pathColor: '#002366',
             })}
         />
     </div>

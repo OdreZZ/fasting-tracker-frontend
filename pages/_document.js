@@ -5,7 +5,7 @@ export default function Document() {
         <Html lang="en">
             <Head>
                 <meta name="theme-color" content="#0F52BA" />
-                <link rel="apple-touch-icon" href="/icons/icon.png"></link>
+                <link rel="apple-touch-icon" href="/icons/icon-192x192.png"></link>
                 <link rel="manifest" href="/manifest.webmanifest" />
                 <script
                     dangerouslySetInnerHTML={{

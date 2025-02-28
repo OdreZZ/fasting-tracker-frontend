@@ -8,6 +8,7 @@ const PHASES = [{
     nicotineCraving: 0,
     nicotineInBlood: 100,
     irritabilityLevel: 0,
+    iconPng: "anabolic_phase.png",
 }, {
     name: "Early Catabolic",
     startHour: 4,
@@ -18,6 +19,7 @@ const PHASES = [{
     nicotineCraving: 60,
     nicotineInBlood: 90,
     irritabilityLevel: 10,
+    iconPng: "early_catabolic_phase.png",
 }, {
     name: "Catabolic",
     startHour: 8,
@@ -28,6 +30,7 @@ const PHASES = [{
     nicotineCraving: 80,
     nicotineInBlood: 80,
     irritabilityLevel: 30,
+    iconPng: "catabolic_phase.png",
 }, {
     name: "Late Catabolic",
     startHour: 12,
@@ -38,6 +41,7 @@ const PHASES = [{
     nicotineCraving: 100,
     nicotineInBlood: 70,
     irritabilityLevel: 80,
+    iconPng: "late_catabolic_phase.png",
 }, {
     name: "Ketosis",
     startHour: 16,
@@ -48,8 +52,9 @@ const PHASES = [{
     nicotineCraving: 80,
     nicotineInBlood: 60,
     irritabilityLevel: 70,
+    iconPng: "ketosis_phase.png",
 }, {
-    name: "Early Autophagic",
+    name: "Early Autophagy",
     startHour: 20,
     hungerLevel: 70,
     healthBoost: 60,
@@ -58,8 +63,9 @@ const PHASES = [{
     nicotineCraving: 50,
     nicotineInBlood: 50,
     irritabilityLevel: 30,
+    iconPng: "early_autophagic_phase.png",
 }, {
-    name: "Autophagic",
+    name: "Autophagy",
     startHour: 24,
     hungerLevel: 40,
     healthBoost: 80,
@@ -68,8 +74,9 @@ const PHASES = [{
     nicotineCraving: 30,
     nicotineInBlood: 40,
     irritabilityLevel: 20,
+    iconPng: "autophagic_phase.png",
 }, {
-    name: "Peak",
+    name: "Peak Autophagy",
     startHour: 28,
     hungerLevel: 10,
     healthBoost: 100,
@@ -78,6 +85,7 @@ const PHASES = [{
     nicotineCraving: 20,
     nicotineInBlood: 30,
     irritabilityLevel: 10,
+    iconPng: "peak_phase.png",
 }, {
     name: "Starvation",
     startHour: 72,
@@ -88,6 +96,7 @@ const PHASES = [{
     nicotineCraving: 0,
     nicotineInBlood: 0,
     irritabilityLevel: 0,
+    iconPng: "starvation_phase.png",
 }, {
     name: "Dangerous",
     startHour: 100,
@@ -98,6 +107,7 @@ const PHASES = [{
     nicotineCraving: 0,
     nicotineInBlood: 0,
     irritabilityLevel: 0,
+    iconPng: "irritability.png",
 }, {
     name: "Dangerous",
     startHour: 1000,
@@ -108,6 +118,7 @@ const PHASES = [{
     nicotineCraving: 0,
     nicotineInBlood: 0,
     irritabilityLevel: 0,
+    iconPng: "irritability.png",
 }];
 
 export default PHASES;

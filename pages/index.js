@@ -138,6 +138,10 @@ export default function Homepage({ start, end, preventCache }) {
             showTobaccoStats: showTobacco !== undefined ? showTobacco : showTobaccoStats,
         };
 
+        if (!settings.showFoodStats && !settings.showTobaccoStats) {
+            return;
+        }
+
         updateCachedSettings(settings);
         setShowFoodStats(settings.showFoodStats);
         setShowTobaccoStats(settings.showTobaccoStats);
@@ -181,7 +185,13 @@ export default function Homepage({ start, end, preventCache }) {
     }
 
     return <div className={styles.homepage}>
-        <h2 className={styles.homepageTitle}>Fasting Tracker</h2>
+        <div className={styles.progressBarsTitle}>
+            <img src={`/icons/${details.iconPng}`} className={styles.phaseIcon} />
+            
+            <div>
+                {details.name}
+            </div>
+        </div>
 
         <div className={styles.timePassedContainer}>
             <CircularProgressBar
@@ -213,13 +223,32 @@ export default function Homepage({ start, end, preventCache }) {
 
         {areOptionsShown && (
             <div className={styles.optionsContainer}>
-                <div className={styles.datePickersContainer}>
-                    <div>
-                        Start and End Dates
-                    </div>
+                <div className={styles.checkboxContainer}>
+                    <Checkbox
+                        label="Food Fast"
+                        isChecked={showFoodStats}
+                        onChange={() => updateSettings({ showFood: !showFoodStats })}
+                        iconPng="food_fast.png"
+                    />
 
+                    <Checkbox
+                        label="Tobacco Fast"
+                        isChecked={showTobaccoStats}
+                        onChange={() => updateSettings({ showTobacco: !showTobaccoStats })}
+                        iconPng="nicotine_craving.png"
+                    />
+                </div>
+
+                <div className={styles.datePickersContainer}>
                     <div className={styles.datePickerContainer}>
                         <div className={styles.datePicker}>
+                            <div className={styles.datePickerHeader}>
+                                <img src="/icons/start_date.png" className={styles.datePickerIcon} />
+                                <div className={styles.datePickerTitle}>
+                                    Start Date
+                                </div>
+                            </div>
+
                             <DatePicker
                                 className={styles.datePickerInput}
                                 selected={startDate}
@@ -230,6 +259,13 @@ export default function Homepage({ start, end, preventCache }) {
                         </div>
 
                         <div className={styles.datePicker}>
+                            <div className={styles.datePickerHeader}>
+                                <img src="/icons/end_date.png" className={styles.datePickerIcon} />
+                                <div className={styles.datePickerTitle}>
+                                    End Date
+                                </div>
+                            </div>
+
                             <DatePicker
                                 className={styles.datePickerInput}
                                 selected={endDate}
@@ -241,40 +277,20 @@ export default function Homepage({ start, end, preventCache }) {
                     </div>
                 </div>
 
-                <div className={styles.checkboxContainer}>
-                    <div>
-                        Options
-                    </div>
-
-                    <Checkbox
-                        label="Show Food Stats"
-                        isChecked={showFoodStats}
-                        onChange={() => updateSettings({ showFood: !showFoodStats })}
-                    />
-
-                    <Checkbox
-                        label="Show Tobacco Stats"
-                        isChecked={showTobaccoStats}
-                        onChange={() => updateSettings({ showTobacco: !showTobaccoStats })}
-                    />
-                </div>
-
                 <div className={styles.actionsContainer}>
-                    <div>
-                        Actions
-                    </div>
+                    <button onClick={onResetDates}>
+                        <img src="/icons/reset.png" className={styles.actionButtonIcon}/>
 
-                    <button onClick={onResetDates}>Reset</button>
+                        <div>
+                            Reset Dates
+                        </div>
+                    </button>
                 </div>
             </div>
         )}
 
         {!areOptionsShown && (
             <div className={styles.progressBars}>
-                <div className={styles.progressBarsTitle}>
-                    {details.name} Phase
-                </div>
-
                 {showFoodStats && (
                     <ProgressBar
                         title="Hunger"

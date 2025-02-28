@@ -1,19 +1,31 @@
 .checkbox {
-    cursor: pointer;
-    font-size: 26px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    letter-spacing: 3px;
-    text-shadow: none;
     display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    width: 100%;
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-shadow: none;
     gap: 5px;
     align-items: center;
-    color: rgb(255, 255, 255, 0.3);
+    opacity: 0.3;
 }
 
 .active {
-    color: white;
+    opacity: 1;
 }
 
 .checkbox input {
     font-size: 18px;
+}
+
+.checkboxTitle {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    text-align: left;
+}
+
+.checkboxIcon {
+    width: 50px;
 }

@@ -28,7 +28,8 @@ export function getProgressData(startDate, endDate) {
         return {
             phase: 0,
             phaseDetails: {
-                name: "",
+                name: "???",
+                iconPng: "start_date.png",
             },
             percentageOfGoal,
             newHungerLevel: 0,
@@ -51,6 +52,7 @@ export function getProgressData(startDate, endDate) {
         phase: currentPhaseIdx + 1,
         phaseDetails: {
             name: currentPhase.name,
+            iconPng: currentPhase.iconPng,
         },
         percentageOfGoal,
         newHungerLevel:

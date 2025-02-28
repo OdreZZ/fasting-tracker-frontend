@@ -92,3 +92,7 @@ a {
     color-scheme: dark;
   }
 }
+
+.react-datepicker-popper {
+  z-index: 1000 !important;
+}
