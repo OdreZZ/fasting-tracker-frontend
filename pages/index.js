@@ -327,18 +327,18 @@ export default function Homepage({ start, end, preventCache }) {
                     />
                 )}
 
-                {showTobaccoStats && (
+                {(showFoodStats || showTobaccoStats) && (
                     <ProgressBar
-                        title="Irritability"
+                        title="Stress"
                         percentage={irritabilityLevel}
-                        color="orange"
+                        color="red"
                         iconPng="irritability.png"
                     />
                 )}
 
                 {(showFoodStats || showTobaccoStats) && (
                     <ProgressBar
-                        title="Health+"
+                        title="Health"
                         percentage={healthBoost}
                         color="forestgreen"
                         iconPng="health_plus.png"
@@ -347,7 +347,7 @@ export default function Homepage({ start, end, preventCache }) {
 
                 {(showFoodStats || showTobaccoStats) && (
                     <ProgressBar
-                        title="Mental+"
+                        title="Focus"
                         percentage={mentalBoost}
                         color="aqua"
                         iconPng="mental_plus.png"
