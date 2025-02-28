@@ -38,7 +38,7 @@
     text-shadow: none;
 }
 
-.datePicker div {
+.datePicker > div {
     width: 100%;
 }
 
