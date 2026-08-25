@@ -1,19 +1,33 @@
-import { PROGRESS_VIEW } from "@/pages";
 import styles from "../../styles/components/Container/TimePassedContainer.module.css";
 import CircularProgressBar from "@/components/Common/CircularProgressBar";
+import { PROGRESS_VIEW, useZustandSelector, useZustandStore } from "@/stores/ZustandStore";
+import { useShallow } from "zustand/shallow";
 
-export default function TimePassedContainer({
-    percentageDone,
-    toggleView,
-    areColonsShown,
-    view,
-    timeDiff,
-}) {
+export default function TimePassedContainer() {
+    const {
+        view,
+        timeDiff,
+        percentageDone,
+        areColonsShown,
+        areOptionsShown,
+        setView,
+        setAreOptionsShown,
+    } = useZustandStore(useShallow(useZustandSelector));
+
     const {
         hours,
         minutes,
         seconds,
     } = timeDiff;
+
+    const toggleView = () => {
+        setAreOptionsShown(!areOptionsShown);
+        if (view === PROGRESS_VIEW.TIME_PASSED) {
+            setView(PROGRESS_VIEW.PERC_PASSED);
+        } else if (view === PROGRESS_VIEW.PERC_PASSED) {
+            setView(PROGRESS_VIEW.TIME_PASSED);
+        }
+    }
     
     return <div className={styles.timePassedContainer}>
         <CircularProgressBar

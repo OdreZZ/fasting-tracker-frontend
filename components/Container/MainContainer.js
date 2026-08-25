@@ -2,7 +2,7 @@
 
 import "../../config/i18n";
 import Head from "next/head";
-import styles from "../../styles/components/container/MainContainer.module.css";
+import styles from "../../styles/components/Container/MainContainer.module.css";
 import { useTranslation } from "react-i18next";
 import localFont from "next/font/local";
 import classNames from "classnames";

@@ -1,17 +1,21 @@
 import styles from "../../styles/components/Container/ProgressBarsContainer.module.css";
 import ProgressBar from "@/components/Common/ProgressBar";
+import { useZustandSelector, useZustandStore } from "@/stores/ZustandStore";
+import { useShallow } from "zustand/shallow";
 
-export default function ProgressBarsContainer({
-    showFoodStats,
-    showTobaccoStats,
-    hungerLevel,
-    autophagyLevel,
-    nicotineCraving,
-    nicotineInBlood,
-    irritabilityLevel,
-    healthBoost,
-    mentalBoost,
-}) {
+export default function ProgressBarsContainer() {
+    const {
+        hungerLevel,
+        autophagyLevel,
+        healthBoost,
+        mentalBoost,
+        nicotineCraving,
+        nicotineInBlood,
+        irritabilityLevel,
+        showFoodStats,
+        showTobaccoStats,
+    } = useZustandStore(useShallow(useZustandSelector));
+
     return <div className={styles.progressBars}>
         {showFoodStats && (
             <ProgressBar

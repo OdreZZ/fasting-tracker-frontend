@@ -1,6 +1,6 @@
 {
   "name": "fasting-tracker-frontend",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3001",
@@ -24,7 +24,8 @@
     "react-country-flag": "^3.1.0",
     "react-datepicker": "^7.2.0",
     "react-dom": "^18",
-    "react-i18next": "^14.1.2"
+    "react-i18next": "^14.1.2",
+    "zustand": "^5.0.15"
   },
   "devDependencies": {
     "eslint": "^8",
