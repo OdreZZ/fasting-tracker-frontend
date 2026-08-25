@@ -1,9 +1,8 @@
 import PHASES from "@/data/phases";
-import moment from "moment";
 
 export function getTimeDiff(givenDate: Date) {
-    const now = moment();
-    const totalSeconds = now.diff(givenDate, 'seconds');
+    const now = new Date();
+    const totalSeconds = Math.floor((now.getTime() - givenDate.getTime()) / 1000);
 
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
@@ -17,12 +16,19 @@ export function getTimeDiff(givenDate: Date) {
 }
 
 export function getProgressData(startDate: Date, endDate: Date) {
-    const now = moment();
-    const start = moment(startDate);
-    const end = moment(endDate);
+    const now = Date.now();
+    const start = startDate.getTime();
+    const end = endDate.getTime();
 
-    const hoursPassed = now.diff(start, 'minutes') / 60.0;
-    const percentageOfGoal = Math.min(Math.max(100.0 * now.diff(start) / end.diff(start), 0), 100);
+    const elapsedMs = now - start;
+    const durationMs = end - start;
+
+    const hoursPassed = elapsedMs / (1000 * 60 * 60);
+
+    const percentageOfGoal = Math.min(
+        Math.max((100 * elapsedMs) / durationMs, 0),
+        100
+    );
     const currentPhaseIdx = PHASES.findIndex(phase => hoursPassed < phase.startHour) - 1;
     if (currentPhaseIdx < 0) {
         return {

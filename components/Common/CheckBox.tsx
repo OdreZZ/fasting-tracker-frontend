@@ -1,8 +1,6 @@
-import React from "react";
 import styles from "../../styles/components/Common/CheckBox.module.css";
-import { CheckBoxOutlineBlank, CheckBoxOutlined } from "@mui/icons-material";
 import classNames from "classnames";
-import ImageIcon from "./ImageIcon";
+import ImageIcon, { ICON_SIZE } from "./ImageIcon";
 
 interface CheckboxProps {
     label: string,
@@ -12,21 +10,19 @@ interface CheckboxProps {
 }
 
 const Checkbox = ({ label, isChecked, onChange, iconPng }: CheckboxProps) => {
-    return (
-        <div className={classNames(styles.checkbox, {
-            [styles.active]: isChecked,
-        })} onClick={onChange}>
-            <div className={styles.checkboxTitle}>
-                <ImageIcon src={iconPng} />
-                <div>{label}</div>
-            </div>
-
-            <div>
-                {!isChecked && (<CheckBoxOutlineBlank />)}
-                {isChecked && (<CheckBoxOutlined />)}
-            </div>
+    return <div className={classNames(styles.checkbox, {
+        [styles.active]: isChecked,
+    })} onClick={onChange}>
+        <div className={styles.checkboxTitle}>
+            <ImageIcon src={iconPng} />
+            <div>{label}</div>
         </div>
-    );
+
+        <div>
+            {!isChecked && <ImageIcon src="checkbox_unchecked.png" size={ICON_SIZE.SMALL} />}
+            {isChecked && <ImageIcon src="checkbox_checked.png" size={ICON_SIZE.SMALL} />}
+        </div>
+    </div>
 };
 
 export default Checkbox;

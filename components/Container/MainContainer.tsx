@@ -6,7 +6,7 @@ import styles from "../../styles/components/Container/MainContainer.module.css";
 import { useTranslation } from "react-i18next";
 import localFont from "next/font/local";
 import classNames from "classnames";
- 
+
 const ffFont = localFont({ src: "../../fonts/FFXIVAppIcons.ttf" });
 
 interface MainContainerProps {
@@ -20,16 +20,14 @@ export default function MainContainer({
 }: MainContainerProps) {
     const { t } = useTranslation();
 
-    return (
-        <div className={classNames(styles.rootContainer, ffFont.className)}>
-            <Head>
-                <title>{t(title)}</title>
-                <link rel="icon" href={`/favicon.ico`} />
-            </Head>
+    return <div className={classNames(styles.rootContainer, ffFont.className)}>
+        <Head>
+            <title>{t(title)}</title>
+            <link rel="icon" href={`/favicon.ico`} />
+        </Head>
 
-            <main className={styles.mainContainer}>
-                {children}
-            </main>
-        </div>
-    )
+        <main className={styles.mainContainer}>
+            {children}
+        </main>
+    </div>
 };
