@@ -18,7 +18,7 @@ export default function MainContainer({
     return (
         <div className={classNames(styles.rootContainer, ffFont.className)}>
             <Head>
-                <title>{t(title)} v{process.env.NEXT_PUBLIC_APP_VERSION}</title>
+                <title>{t(title)}</title>
                 <link rel="icon" href={`/favicon.ico`} />
             </Head>
 

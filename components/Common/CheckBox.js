@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../../styles/components/Common/CheckBox.module.css";
 import { CheckBoxOutlineBlank, CheckBoxOutlined } from "@mui/icons-material";
 import classNames from "classnames";
+import ImageIcon from "./ImageIcon";
 
 const Checkbox = ({ label, isChecked, onChange, iconPng }) => {
     return (
@@ -9,7 +10,7 @@ const Checkbox = ({ label, isChecked, onChange, iconPng }) => {
             [styles.active]: isChecked,
         })} onClick={onChange}>
             <div className={styles.checkboxTitle}>
-                <img src={`/icons/${iconPng}`} className={styles.checkboxIcon} />
+                <ImageIcon src={iconPng} />
                 <div>{label}</div>
             </div>
 

@@ -1,6 +1,7 @@
 import DatePicker from "react-datepicker";
 import styles from "../../styles/components/Common/CustomDatePicker.module.css";
 import "react-datepicker/dist/react-datepicker.css";
+import ImageIcon from "./ImageIcon";
 
 export default function CustomDatePicker({
     text,
@@ -10,7 +11,7 @@ export default function CustomDatePicker({
 }) {
     return <div className={styles.datePicker}>
         <div className={styles.datePickerHeader}>
-            <img src={icon} className={styles.datePickerIcon} />
+            <ImageIcon src={icon} />
             <div className={styles.datePickerTitle}>
                 {text}
             </div>

@@ -1,16 +1,15 @@
 import styles from "../styles/pages/Homepage.module.css";
 import { useEffect, useState } from "react";
+import { useZustandSelector, useZustandStore } from "@/stores/ZustandStore";
+import { useShallow } from "zustand/shallow";
+
 import { getProgressData, getTimeDiff } from "@/utils/date-calculations";
-import {
-    getCachedSettings,
-    getFastGoalDate,
-    getFastStartingDate,
-} from "@/utils/local-storage";
+import { getCachedSettings, getFastGoalDate, getFastStartingDate } from "@/utils/local-storage";
+
+import ImageIcon, { ICON_SIZE } from "@/components/Common/ImageIcon";
 import OptionsContainer from "@/components/Container/OptionsContainer";
 import ProgressBarsContainer from "@/components/Container/ProgressBarsContainer";
 import TimePassedContainer from "@/components/Container/TimePassedContainer";
-import { useZustandSelector, useZustandStore } from "@/stores/ZustandStore";
-import { useShallow } from "zustand/shallow";
 
 export default function Homepage({ start, end, preventCache }) {
     const [isLoading, setIsLoading] = useState(true);
@@ -100,7 +99,7 @@ export default function Homepage({ start, end, preventCache }) {
 
     return <div className={styles.homepage}>
         <div className={styles.phaseTitle}>
-            <img src={`/icons/${details.iconPng}`} className={styles.phaseIcon} />
+            <ImageIcon src={details.iconPng} size={ICON_SIZE.LARGE} />
 
             <div>
                 {details.name}

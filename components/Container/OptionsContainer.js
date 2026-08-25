@@ -9,6 +9,7 @@ import {
     updateFastStartingDate,
 } from "@/utils/local-storage";
 import { useRouter } from "next/router";
+import ImageIcon from "../Common/ImageIcon";
 
 export default function OptionsContainer() {
     const router = useRouter();
@@ -98,14 +99,14 @@ export default function OptionsContainer() {
             <div className={styles.datePickerContainer}>
                 <CustomDatePicker
                     text="Start Date"
-                    icon="/icons/start_date.png"
+                    icon="start_date.png"
                     date={startDate}
                     onDateChange={updateStartDate}
                 />
 
                 <CustomDatePicker
                     text="End Date"
-                    icon="/icons/end_date.png"
+                    icon="end_date.png"
                     date={endDate}
                     onDateChange={updateEndDate}
                 />
@@ -114,7 +115,7 @@ export default function OptionsContainer() {
 
         <div className={styles.actionsContainer}>
             <button onClick={onResetDates}>
-                <img src={`/icons/reset.png`} className={styles.actionButtonIcon} />
+                <ImageIcon src="reset.png" />
 
                 <div>
                     Reset Dates

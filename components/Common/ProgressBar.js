@@ -1,14 +1,8 @@
 import React from "react";
 import styles from "../../styles/components/Common/ProgressBar.module.css";
+import ImageIcon from "./ImageIcon";
 
-const ProgressBar = ({ title, percentage, color, icon, iconPng }) => {
-    let iconRender = icon;
-    if (iconPng) {
-        iconRender = <img className={styles.progressBarIcon}
-        src={`/icons/${iconPng}`}
-        />
-    }
-
+const ProgressBar = ({ title, percentage, color, iconPng }) => {
     return <div className={styles.progressBarContainer}>
         <div className={styles.progressBar}>
             <div className={styles.progressBarFill}
@@ -19,7 +13,7 @@ const ProgressBar = ({ title, percentage, color, icon, iconPng }) => {
             />
 
             <div className={styles.progressBarText}>
-                <div className={styles.progressBarTitle}>{iconRender} {title}</div>
+                <div className={styles.progressBarTitle}><ImageIcon src={iconPng} /> {title}</div>
 
                 <div>{percentage.toFixed(0)}%</div>
             </div>
