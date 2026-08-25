@@ -1,10 +1,12 @@
 import React from "react";
-import styles from "../../styles/ProgressBar.module.css";
+import styles from "../../styles/components/Common/ProgressBar.module.css";
 
 const ProgressBar = ({ title, percentage, color, icon, iconPng }) => {
     let iconRender = icon;
     if (iconPng) {
-        iconRender = <img className={styles.progressBarIcon} src={`/icons/${iconPng}`} />
+        iconRender = <img className={styles.progressBarIcon}
+        src={`/icons/${iconPng}`}
+        />
     }
 
     return <div className={styles.progressBarContainer}>

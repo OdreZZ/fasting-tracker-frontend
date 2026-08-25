@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/CheckBox.module.css";
+import styles from "../../styles/components/Common/CheckBox.module.css";
 import { CheckBoxOutlineBlank, CheckBoxOutlined } from "@mui/icons-material";
 import classNames from "classnames";
 

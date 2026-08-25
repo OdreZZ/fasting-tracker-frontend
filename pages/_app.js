@@ -7,8 +7,8 @@ function MyApp({ Component, pageProps }) {
         <>
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <link rel="icon" href="/favicon.ico" />
-                <title>Fasting-Tracker v0.1</title>
+                <link rel="icon" href={`/favicon.ico`} />
+                <title>Fasting Tracker v{process.env.NEXT_PUBLIC_APP_VERSION}</title>
             </Head>
 
             <MainContainer title={pageProps.pageTitle}>

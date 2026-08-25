@@ -13,7 +13,7 @@ export function getTimeDiff(givenDate) {
         hours,
         minutes,
         seconds,
-    }
+    };
 }
 
 export function getProgressData(startDate, endDate) {
@@ -26,7 +26,7 @@ export function getProgressData(startDate, endDate) {
     const currentPhaseIdx = PHASES.findIndex(phase => hoursPassed < phase.startHour) - 1;
     if (currentPhaseIdx < 0) {
         return {
-            phase: 0,
+            // phase: 0,
             phaseDetails: {
                 name: "???",
                 iconPng: "start_date.png",
@@ -39,7 +39,7 @@ export function getProgressData(startDate, endDate) {
             newNicotineCraving: 0,
             newNicotineInBlood: 0,
             newIrritabilityLevel: 0,
-        }
+        };
     }
 
     const currentPhase = PHASES[currentPhaseIdx];
@@ -49,7 +49,7 @@ export function getProgressData(startDate, endDate) {
     const hoursInThisPhase = nextPhase.startHour - currentPhase.startHour;
 
     return {
-        phase: currentPhaseIdx + 1,
+        // phase: currentPhaseIdx + 1,
         phaseDetails: {
             name: currentPhase.name,
             iconPng: currentPhase.iconPng,
@@ -69,7 +69,7 @@ export function getProgressData(startDate, endDate) {
             getMiddlePoint(currentPhase.nicotineInBlood, hoursInThisPhase, nextPhase.nicotineInBlood, hoursSinceCurrentPhase),
         newIrritabilityLevel:
             getMiddlePoint(currentPhase.irritabilityLevel, hoursInThisPhase, nextPhase.irritabilityLevel, hoursSinceCurrentPhase),
-    }
+    };
 }
 
 function getMiddlePoint(y1, x2, y2, x) {

@@ -1,0 +1,38 @@
+.timePassedContainer {
+    position: relative;
+    margin: 26px 0;
+    padding: 0 24px;
+    min-width: 350px;
+    max-width: 550px;
+    align-self: center;
+}
+
+.timePassed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0 52px;
+    cursor: pointer;
+}
+
+.timePassedText {
+    display: flex;
+    gap: 10px;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.timePassedCount {
+    font-size: 40px;
+    letter-spacing: 1px;
+    font-family: 'Lucida Console', Courier, monospace;
+}
+
+.percPassedCount {
+    font-size: 40px;
+    letter-spacing: 4px;
+    font-family: 'Lucida Console', Courier, monospace;
+}

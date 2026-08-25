@@ -1,8 +1,7 @@
-import { useTranslation } from "react-i18next";
-
+import styles from "../styles/pages/Homepage.module.css";
 import { useEffect, useState } from "react";
 import { getProgressData, getTimeDiff } from "@/utils/date-calculations";
-import { 
+import {
     getCachedSettings,
     getFastGoalDate,
     getFastStartingDate,
@@ -10,27 +9,22 @@ import {
     updateFastGoalDate,
     updateFastStartingDate,
 } from "@/utils/local-storage";
-import styles from "../styles/Homepage.module.css";
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import ProgressBar from "@/components/Common/ProgressBar";
-import CircularProgressBar from "@/components/Common/CircularProgressBar";
 import { useRouter } from "next/router";
-import Checkbox from "@/components/Common/CheckBox";
+import OptionsContainer from "@/components/Container/OptionsContainer";
+import ProgressBarsContainer from "@/components/Container/ProgressBarsContainer";
+import TimePassedContainer from "@/components/Container/TimePassedContainer";
 
-const PROGRESS_VIEW = {
+export const PROGRESS_VIEW = {
     TIME_PASSED: "TIME_PASSED",
     PERC_PASSED: "PERC_PASSED",
 };
 
 export default function Homepage({ start, end, preventCache }) {
-    const { t } = useTranslation();
     const router = useRouter();
 
     const [isLoading, setIsLoading] = useState(true);
     const [view, setView] = useState(PROGRESS_VIEW.TIME_PASSED);
-    const [phase, setPhase] = useState(0);
     const [details, setDetails] = useState({});
     const [startDate, setStartDate] = useState(new Date(parseInt(start)));
     const [endDate, setEndDate] = useState(new Date(parseInt(end)));
@@ -47,12 +41,6 @@ export default function Homepage({ start, end, preventCache }) {
     const [areOptionsShown, setAreOptionsShown] = useState(false);
     const [showFoodStats, setShowFoodStats] = useState(true);
     const [showTobaccoStats, setShowTobaccoStats] = useState(true);
-
-    const {
-        hours,
-        minutes,
-        seconds,
-    } = timeDiff;
 
     const toggleView = () => {
         setAreOptionsShown(prev => !prev);
@@ -107,7 +95,6 @@ export default function Homepage({ start, end, preventCache }) {
         setTimeDiff(newTimeDiff);
 
         const {
-            phase,
             phaseDetails,
             percentageOfGoal,
             newHungerLevel,
@@ -119,7 +106,6 @@ export default function Homepage({ start, end, preventCache }) {
             newIrritabilityLevel,
         } = getProgressData(startDate, endDate);
 
-        setPhase(phase);
         setDetails(phaseDetails);
         setHungerLevel(newHungerLevel);
         setHealthBoost(newHealthBoost);
@@ -185,176 +171,44 @@ export default function Homepage({ start, end, preventCache }) {
     }
 
     return <div className={styles.homepage}>
-        <div className={styles.progressBarsTitle}>
+        <div className={styles.phaseTitle}>
             <img src={`/icons/${details.iconPng}`} className={styles.phaseIcon} />
-            
+
             <div>
                 {details.name}
             </div>
         </div>
 
-        <div className={styles.timePassedContainer}>
-            <CircularProgressBar
-                percentage={percentageDone}
-            />
+        <TimePassedContainer
+            percentageDone={percentageDone}
+            toggleView={toggleView}
+            areColonsShown={areColonsShown}
+            view={view}
+            timeDiff={timeDiff}
+        />
 
-            <div className={styles.timePassed}
-                onClick={toggleView}
-            >
-                <div className={styles.timePassedText}>
-                    {view === PROGRESS_VIEW.TIME_PASSED && (
-                        <div className={styles.timePassedCount}>
-                            {Math.abs(hours).toString().padStart(2, '0')}
-                            {areColonsShown ? ":" : " "}
-                            {Math.abs(minutes).toString().padStart(2, '0')}
-                            {areColonsShown ? ":" : " "}
-                            {Math.abs(seconds).toString().padStart(2, '0')}
-                        </div>
-                    )}
+        {areOptionsShown && <OptionsContainer 
+            showFoodStats={showFoodStats}
+            showTobaccoStats={showTobaccoStats}
+            updateSettings={updateSettings}
+            startDate={startDate}
+            endDate={endDate}
+            updateStartDate={updateStartDate}
+            updateEndDate={updateEndDate}
+            onResetDates={onResetDates}
+        />}
 
-                    {view === PROGRESS_VIEW.PERC_PASSED && (
-                        <div className={styles.percPassedCount}>
-                            {percentageDone.toFixed(2)}%
-                        </div>
-                    )}
-                </div>
-            </div>
-        </div>
-
-        {areOptionsShown && (
-            <div className={styles.optionsContainer}>
-                <div className={styles.checkboxContainer}>
-                    <Checkbox
-                        label="Food Fast"
-                        isChecked={showFoodStats}
-                        onChange={() => updateSettings({ showFood: !showFoodStats })}
-                        iconPng="food_fast.png"
-                    />
-
-                    <Checkbox
-                        label="Tobacco Fast"
-                        isChecked={showTobaccoStats}
-                        onChange={() => updateSettings({ showTobacco: !showTobaccoStats })}
-                        iconPng="nicotine_craving.png"
-                    />
-                </div>
-
-                <div className={styles.datePickersContainer}>
-                    <div className={styles.datePickerContainer}>
-                        <div className={styles.datePicker}>
-                            <div className={styles.datePickerHeader}>
-                                <img src="/icons/start_date.png" className={styles.datePickerIcon} />
-                                <div className={styles.datePickerTitle}>
-                                    Start Date
-                                </div>
-                            </div>
-
-                            <DatePicker
-                                className={styles.datePickerInput}
-                                selected={startDate}
-                                onChange={updateStartDate}
-                                showTimeSelect
-                                dateFormat="Pp"
-                            />
-                        </div>
-
-                        <div className={styles.datePicker}>
-                            <div className={styles.datePickerHeader}>
-                                <img src="/icons/end_date.png" className={styles.datePickerIcon} />
-                                <div className={styles.datePickerTitle}>
-                                    End Date
-                                </div>
-                            </div>
-
-                            <DatePicker
-                                className={styles.datePickerInput}
-                                selected={endDate}
-                                onChange={updateEndDate}
-                                showTimeSelect
-                                dateFormat="Pp"
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                <div className={styles.actionsContainer}>
-                    <button onClick={onResetDates}>
-                        <img src="/icons/reset.png" className={styles.actionButtonIcon}/>
-
-                        <div>
-                            Reset Dates
-                        </div>
-                    </button>
-                </div>
-            </div>
-        )}
-
-        {!areOptionsShown && (
-            <div className={styles.progressBars}>
-                {showFoodStats && (
-                    <ProgressBar
-                        title="Hunger"
-                        percentage={hungerLevel}
-                        color="orange"
-                        iconPng="hunger.png"
-                    />
-                )}
-
-                {showFoodStats && (
-                    <ProgressBar
-                        title="Autophagy"
-                        percentage={autophagyLevel}
-                        color="cyan"
-                        iconPng="autophagy.png"
-                    />
-                )}
-
-                {showTobaccoStats && (
-                    <ProgressBar
-                        title="Nicotine Craving"
-                        percentage={nicotineCraving}
-                        color="orange"
-                        iconPng="nicotine_craving.png"
-                    />
-                )}
-
-                {showTobaccoStats && (
-                    <ProgressBar
-                        title="Nicotine in Blood"
-                        percentage={nicotineInBlood}
-                        color="red"
-                        iconPng="nicotine_blood.png"
-                    />
-                )}
-
-                {(showFoodStats || showTobaccoStats) && (
-                    <ProgressBar
-                        title="Stress"
-                        percentage={irritabilityLevel}
-                        color="red"
-                        iconPng="irritability.png"
-                    />
-                )}
-
-                {(showFoodStats || showTobaccoStats) && (
-                    <ProgressBar
-                        title="Health"
-                        percentage={healthBoost}
-                        color="forestgreen"
-                        iconPng="health_plus.png"
-                    />
-                )}
-
-                {(showFoodStats || showTobaccoStats) && (
-                    <ProgressBar
-                        title="Focus"
-                        percentage={mentalBoost}
-                        color="aqua"
-                        iconPng="mental_plus.png"
-                    />
-                )}
-            </div>
-        )}
+        {!areOptionsShown && <ProgressBarsContainer
+            showFoodStats={showFoodStats}
+            showTobaccoStats={showTobaccoStats}
+            hungerLevel={hungerLevel}
+            autophagyLevel={autophagyLevel}
+            nicotineCraving={nicotineCraving}
+            nicotineInBlood={nicotineInBlood}
+            irritabilityLevel={irritabilityLevel}
+            healthBoost={healthBoost}
+            mentalBoost={mentalBoost}
+        />}
     </div>;
 }
 
