@@ -1,17 +1,25 @@
 import { create } from "zustand";
+import { ZustandState } from "./ZustandStoreTypes";
 
 export const PROGRESS_VIEW = {
     TIME_PASSED: "TIME_PASSED",
     PERC_PASSED: "PERC_PASSED",
 };
 
-export const useZustandStore = create((set, get) => {
+export const useZustandStore = create<ZustandState>((set, get) => {
     return {
         view: PROGRESS_VIEW.TIME_PASSED,
-        details: {},
+        details: {
+            name: "",
+            iconPng: "",
+        },
         startDate: null,
         endDate: null,
-        timeDiff: null,
+        timeDiff: {
+            seconds: 0,
+            minutes: 0,
+            hours: 0,
+        },
         percentageDone: 0,
         hungerLevel: 0,
         autophagyLevel: 0,
@@ -45,7 +53,7 @@ export const useZustandStore = create((set, get) => {
     }
 });
 
-export const useZustandSelector = (state) => {
+export const useZustandSelector = (state: ZustandState) => {
     return {
         view: state.view,
         details: state.details,

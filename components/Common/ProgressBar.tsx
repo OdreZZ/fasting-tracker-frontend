@@ -2,7 +2,14 @@ import React from "react";
 import styles from "../../styles/components/Common/ProgressBar.module.css";
 import ImageIcon from "./ImageIcon";
 
-const ProgressBar = ({ title, percentage, color, iconPng }) => {
+interface ProgressBarProps {
+    title: string,
+    percentage: number,
+    color: string,
+    iconPng: string,
+}
+
+export default function ProgressBar({ title, percentage, color, iconPng }: ProgressBarProps) {
     return <div className={styles.progressBarContainer}>
         <div className={styles.progressBar}>
             <div className={styles.progressBarFill}
@@ -20,5 +27,3 @@ const ProgressBar = ({ title, percentage, color, iconPng }) => {
         </div>
     </div>
 };
-
-export default ProgressBar;

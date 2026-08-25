@@ -10,8 +10,15 @@ import ImageIcon, { ICON_SIZE } from "@/components/Common/ImageIcon";
 import OptionsContainer from "@/components/Container/OptionsContainer";
 import ProgressBarsContainer from "@/components/Container/ProgressBarsContainer";
 import TimePassedContainer from "@/components/Container/TimePassedContainer";
+import { GetServerSidePropsContext } from "next";
 
-export default function Homepage({ start, end, preventCache }) {
+interface HomepageProps {
+    start: string,
+    end: string,
+    preventCache: boolean,
+}
+
+export default function Homepage({ start, end, preventCache }: HomepageProps) {
     const [isLoading, setIsLoading] = useState(true);
 
     const {
@@ -37,6 +44,10 @@ export default function Homepage({ start, end, preventCache }) {
     } = useZustandStore(useShallow(useZustandSelector));
 
     const updateData = () => {
+        if (!startDate || !endDate) {
+            return;
+        }
+
         const newTimeDiff = getTimeDiff(startDate);
         setTimeDiff(newTimeDiff);
 
@@ -112,7 +123,7 @@ export default function Homepage({ start, end, preventCache }) {
     </div>;
 }
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
     const { query } = context;
     const currentMilliseconds = (new Date()).getTime();
     const start = query.start || currentMilliseconds;

@@ -1,8 +1,9 @@
 import "../styles/globals.css";
 import MainContainer from "../components/Container/MainContainer";
 import Head from "next/head";
+import { AppProps } from "next/app";
 
-function FastingTrackerApp({ Component, pageProps }) {
+function FastingTrackerApp({ Component, pageProps }: AppProps) {
     return <>
         <Head>
             <title>Fasting Tracker</title>

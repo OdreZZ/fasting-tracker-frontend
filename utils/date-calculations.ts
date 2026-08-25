@@ -1,7 +1,7 @@
 import PHASES from "@/data/phases";
 import moment from "moment";
 
-export function getTimeDiff(givenDate) {
+export function getTimeDiff(givenDate: Date) {
     const now = moment();
     const totalSeconds = now.diff(givenDate, 'seconds');
 
@@ -16,7 +16,7 @@ export function getTimeDiff(givenDate) {
     };
 }
 
-export function getProgressData(startDate, endDate) {
+export function getProgressData(startDate: Date, endDate: Date) {
     const now = moment();
     const start = moment(startDate);
     const end = moment(endDate);
@@ -72,6 +72,6 @@ export function getProgressData(startDate, endDate) {
     };
 }
 
-function getMiddlePoint(y1, x2, y2, x) {
+function getMiddlePoint(y1: number, x2: number, y2: number, x: number) {
     return y1 + (x - 0.0) * (y2 - y1) / (x2 - 0.0);
 }

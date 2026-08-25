@@ -4,7 +4,14 @@ import { CheckBoxOutlineBlank, CheckBoxOutlined } from "@mui/icons-material";
 import classNames from "classnames";
 import ImageIcon from "./ImageIcon";
 
-const Checkbox = ({ label, isChecked, onChange, iconPng }) => {
+interface CheckboxProps {
+    label: string,
+    isChecked: boolean,
+    onChange: () => void,
+    iconPng: string,
+}
+
+const Checkbox = ({ label, isChecked, onChange, iconPng }: CheckboxProps) => {
     return (
         <div className={classNames(styles.checkbox, {
             [styles.active]: isChecked,

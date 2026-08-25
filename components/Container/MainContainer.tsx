@@ -9,10 +9,15 @@ import classNames from "classnames";
  
 const ffFont = localFont({ src: "../../fonts/FFXIVAppIcons.ttf" });
 
+interface MainContainerProps {
+    title: string,
+    children: React.ReactNode,
+}
+
 export default function MainContainer({
     title,
     children,
-}) {
+}: MainContainerProps) {
     const { t } = useTranslation();
 
     return (
@@ -27,4 +32,4 @@ export default function MainContainer({
             </main>
         </div>
     )
-}
+};

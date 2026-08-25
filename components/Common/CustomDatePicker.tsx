@@ -3,12 +3,19 @@ import styles from "../../styles/components/Common/CustomDatePicker.module.css";
 import "react-datepicker/dist/react-datepicker.css";
 import ImageIcon from "./ImageIcon";
 
+interface CustomDatePickerProps {
+    text: string,
+    icon: string,
+    date: Date | null,
+    onDateChange: (date: Date | null) => void,
+}
+
 export default function CustomDatePicker({
     text,
     icon,
     date,
     onDateChange,
-}) {
+}: CustomDatePickerProps) {
     return <div className={styles.datePicker}>
         <div className={styles.datePickerHeader}>
             <ImageIcon src={icon} />

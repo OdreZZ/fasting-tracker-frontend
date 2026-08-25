@@ -6,7 +6,7 @@ export function getFastStartingDate() {
     return getLocalStorageItem(FAST_DATE);
 };
 
-export function updateFastStartingDate(startingDate) {
+export function updateFastStartingDate(startingDate: Date) {
     setLocalStorageItem(FAST_DATE, startingDate);
 };
 
@@ -14,7 +14,7 @@ export function getFastGoalDate() {
     return getLocalStorageItem(GOAL_DATE);
 };
 
-export function updateFastGoalDate(endDate) {
+export function updateFastGoalDate(endDate: Date) {
     setLocalStorageItem(GOAL_DATE, endDate);
 };
 
@@ -22,11 +22,11 @@ export function getCachedSettings() {
     return getLocalStorageItem(SETTINGS);
 };
 
-export function updateCachedSettings(settings) {
+export function updateCachedSettings(settings: { showFoodStats: boolean, showTobaccoStats: boolean}) {
     setLocalStorageItem(SETTINGS, settings);
 };
 
-function getLocalStorageItem(key, defaultValue=false) {
+function getLocalStorageItem(key: string, defaultValue=false) {
     if (typeof window !== 'undefined') {
         const item = localStorage.getItem(key);
 
@@ -42,7 +42,7 @@ function getLocalStorageItem(key, defaultValue=false) {
     return defaultValue;
 };
 
-function setLocalStorageItem(key, item) {
+function setLocalStorageItem(key: string, item: any) {
     if (typeof window !== 'undefined') {
         localStorage.setItem(key, JSON.stringify(item));
     }

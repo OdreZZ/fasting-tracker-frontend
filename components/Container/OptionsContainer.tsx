@@ -26,23 +26,31 @@ export default function OptionsContainer() {
         setShowTobaccoStats,
     } = useZustandStore(useShallow(useZustandSelector));
 
-    const updateStartDate = (date) => {
+    const updateStartDate = (date: Date | null) => {
+        if (!date) {
+            return;
+        }
+
         setStartDate(date);
         updateFastStartingDate(date);
 
         router.push({
             pathname: '/',
-            query: { start: date.getTime(), end: endDate.getTime() },
+            query: { start: date.getTime(), end: endDate?.getTime() },
         });
     }
 
-    const updateEndDate = (date) => {
+    const updateEndDate = (date: Date | null) => {
+        if (!date) {
+            return;
+        }
+
         setEndDate(date);
         updateFastGoalDate(date);
 
         router.push({
             pathname: '/',
-            query: { start: startDate.getTime(), end: endDate.getTime() },
+            query: { start: startDate?.getTime(), end: endDate?.getTime() },
         });
     }
 
@@ -59,11 +67,11 @@ export default function OptionsContainer() {
 
         router.push({
             pathname: '/',
-            query: { start: startDate.getTime(), end: endDate.getTime() },
+            query: { start: startDate?.getTime(), end: endDate?.getTime() },
         });
     }
 
-    const updateSettings = ({ showFood, showTobacco }) => {
+    const updateSettings = ({ showFood, showTobacco }: { showFood?: boolean, showTobacco?: boolean }) => {
         const settings = {
             showFoodStats: showFood !== undefined ? showFood : showFoodStats,
             showTobaccoStats: showTobacco !== undefined ? showTobacco : showTobaccoStats,
