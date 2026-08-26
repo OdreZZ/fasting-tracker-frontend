@@ -6,7 +6,6 @@ import { useShallow } from "zustand/shallow";
 import { getProgressData, getTimeDiff } from "@/utils/date-calculations";
 import { getCachedSettings, getFastGoalDate, getFastStartingDate } from "@/utils/local-storage";
 
-import ImageIcon, { ICON_SIZE } from "@/components/Common/ImageIcon";
 import OptionsContainer from "@/components/Container/OptionsContainer";
 import ProgressBarsContainer from "@/components/Container/ProgressBarsContainer";
 import TimePassedContainer from "@/components/Container/TimePassedContainer";
@@ -22,22 +21,16 @@ export default function Homepage({ start, end, preventCache }: HomepageProps) {
     const [isLoading, setIsLoading] = useState(true);
 
     const {
-        details,
         startDate,
         endDate,
         areOptionsShown,
-        setDetails,
+        progressLevels,
+        setPhaseDetails,
         setStartDate,
         setEndDate,
         setTimeDiff,
         setPercentageDone,
-        setHungerLevel,
-        setAuthophagyLevel,
-        setHealthBoost,
-        setMentalBoost,
-        setNicotineCraving,
-        setNicotineInBlood,
-        setIrritabilityLevel,
+        setProgressLevels,
         toggleColonsShown,
         setShowFoodStats,
         setShowTobaccoStats,
@@ -53,15 +46,11 @@ export default function Homepage({ start, end, preventCache }: HomepageProps) {
 
         const progressData = getProgressData(startDate, endDate);
 
-        setDetails(progressData.phaseDetails);
-        setHungerLevel(progressData.newHungerLevel);
-        setHealthBoost(progressData.newHealthBoost);
-        setMentalBoost(progressData.newMentalBoost);
-        setAuthophagyLevel(progressData.newAutophagyLevel);
+        setPhaseDetails(progressData.phaseDetails);
         setPercentageDone(progressData.percentageOfGoal);
-        setNicotineCraving(progressData.newNicotineCraving);
-        setNicotineInBlood(progressData.newNicotineInBlood);
-        setIrritabilityLevel(progressData.newIrritabilityLevel);
+
+        setProgressLevels(progressData.progressLevels);
+
         toggleColonsShown();
     }
 
@@ -109,14 +98,6 @@ export default function Homepage({ start, end, preventCache }: HomepageProps) {
     }
 
     return <div className={styles.homepage}>
-        <div className={styles.phaseTitle}>
-            <ImageIcon src={details.iconPng} size={ICON_SIZE.LARGE} />
-
-            <div>
-                {details.name}
-            </div>
-        </div>
-
         <TimePassedContainer />
 
         {areOptionsShown ? <OptionsContainer /> : <ProgressBarsContainer />}

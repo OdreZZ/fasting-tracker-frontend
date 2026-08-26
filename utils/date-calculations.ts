@@ -1,4 +1,6 @@
 import PHASES from "@/data/phases";
+import { PROGRESS_LEVELS } from "@/stores/ZustandStore";
+import { ProgressLevel } from "@/stores/ZustandStoreTypes";
 
 export function getTimeDiff(givenDate: Date) {
     const now = new Date();
@@ -32,19 +34,33 @@ export function getProgressData(startDate: Date, endDate: Date) {
     const currentPhaseIdx = PHASES.findIndex(phase => hoursPassed < phase.startHour) - 1;
     if (currentPhaseIdx < 0) {
         return {
-            // phase: 0,
             phaseDetails: {
                 name: "???",
-                iconPng: "start_date.png",
+                iconSrc: "start_date.png",
             },
             percentageOfGoal,
-            newHungerLevel: 0,
-            newHealthBoost: 0,
-            newMentalBoost: 0,
-            newAutophagyLevel: 0,
-            newNicotineCraving: 0,
-            newNicotineInBlood: 0,
-            newIrritabilityLevel: 0,
+            progressLevels: [{
+                name: PROGRESS_LEVELS.HUNGER,
+                level: 0,
+            }, {
+                name: PROGRESS_LEVELS.AUTOPHAGY,
+                level: 0,
+            }, {
+                name: PROGRESS_LEVELS.HEALTH,
+                level: 0,
+            }, {
+                name: PROGRESS_LEVELS.FOCUS,
+                level: 0,
+            }, {
+                name: PROGRESS_LEVELS.NICOTINE_CRAVING,
+                level: 0,
+            }, {
+                name: PROGRESS_LEVELS.NICOTINE_IN_BLOOD,
+                level: 0,
+            }, {
+                name: PROGRESS_LEVELS.STRESS,
+                level: 0,
+            }],
         };
     }
 
@@ -54,27 +70,18 @@ export function getProgressData(startDate: Date, endDate: Date) {
     const hoursSinceCurrentPhase = hoursPassed - currentPhase.startHour;
     const hoursInThisPhase = nextPhase.startHour - currentPhase.startHour;
 
+    const progressLevels = currentPhase.progressLevels.map((progressLevel, idx) => ({
+        name: progressLevel.name,
+        level: getMiddlePoint(progressLevel.level, hoursInThisPhase, nextPhase.progressLevels[idx].level, hoursSinceCurrentPhase),
+    }));
+
     return {
-        // phase: currentPhaseIdx + 1,
         phaseDetails: {
             name: currentPhase.name,
-            iconPng: currentPhase.iconPng,
+            iconSrc: currentPhase.iconSrc,
         },
         percentageOfGoal,
-        newHungerLevel:
-            getMiddlePoint(currentPhase.hungerLevel, hoursInThisPhase, nextPhase.hungerLevel, hoursSinceCurrentPhase),
-        newHealthBoost:
-            getMiddlePoint(currentPhase.healthBoost, hoursInThisPhase, nextPhase.healthBoost, hoursSinceCurrentPhase),
-        newMentalBoost:
-            getMiddlePoint(currentPhase.mentalBoost, hoursInThisPhase, nextPhase.mentalBoost, hoursSinceCurrentPhase),
-        newAutophagyLevel:
-            getMiddlePoint(currentPhase.autophagyLevel, hoursInThisPhase, nextPhase.autophagyLevel, hoursSinceCurrentPhase),
-        newNicotineCraving:
-            getMiddlePoint(currentPhase.nicotineCraving, hoursInThisPhase, nextPhase.nicotineCraving, hoursSinceCurrentPhase),
-        newNicotineInBlood:
-            getMiddlePoint(currentPhase.nicotineInBlood, hoursInThisPhase, nextPhase.nicotineInBlood, hoursSinceCurrentPhase),
-        newIrritabilityLevel:
-            getMiddlePoint(currentPhase.irritabilityLevel, hoursInThisPhase, nextPhase.irritabilityLevel, hoursSinceCurrentPhase),
+        progressLevels,
     };
 }
 

@@ -1,124 +1,291 @@
+import { PROGRESS_LEVELS } from "@/stores/ZustandStore";
+
 const PHASES = [{
     name: "Anabolic",
     startHour: 0,
-    hungerLevel: 0,
-    healthBoost: 0,
-    mentalBoost: 30,
-    autophagyLevel: 0,
-    nicotineCraving: 0,
-    nicotineInBlood: 100,
-    irritabilityLevel: 25,
-    iconPng: "anabolic_phase.png",
+    progressLevels: [{
+        name: PROGRESS_LEVELS.HUNGER,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.AUTOPHAGY,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.HEALTH,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.FOCUS,
+        level: 30,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_CRAVING,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_IN_BLOOD,
+        level: 100,
+    }, {
+        name: PROGRESS_LEVELS.STRESS,
+        level: 25,
+    }],
+    iconSrc: "phase_1.jpg",
 }, {
     name: "Early Catabolic",
     startHour: 4,
-    hungerLevel: 25,
-    healthBoost: 15,
-    mentalBoost: 30,
-    autophagyLevel: 0,
-    nicotineCraving: 60,
-    nicotineInBlood: 90,
-    irritabilityLevel: 25,
-    iconPng: "early_catabolic_phase.png",
+    progressLevels: [{
+        name: PROGRESS_LEVELS.HUNGER,
+        level: 25,
+    }, {
+        name: PROGRESS_LEVELS.AUTOPHAGY,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.HEALTH,
+        level: 15,
+    }, {
+        name: PROGRESS_LEVELS.FOCUS,
+        level: 30,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_CRAVING,
+        level: 60,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_IN_BLOOD,
+        level: 90,
+    }, {
+        name: PROGRESS_LEVELS.STRESS,
+        level: 25,
+    }],
+    iconSrc: "phase_2.jpg",
 }, {
     name: "Catabolic",
     startHour: 8,
-    hungerLevel: 60,
-    healthBoost: 40,
-    mentalBoost: 20,
-    autophagyLevel: 0,
-    nicotineCraving: 80,
-    nicotineInBlood: 80,
-    irritabilityLevel: 30,
-    iconPng: "catabolic_phase.png",
+    progressLevels: [{
+        name: PROGRESS_LEVELS.HUNGER,
+        level: 60,
+    }, {
+        name: PROGRESS_LEVELS.AUTOPHAGY,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.HEALTH,
+        level: 40,
+    }, {
+        name: PROGRESS_LEVELS.FOCUS,
+        level: 20,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_CRAVING,
+        level: 80,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_IN_BLOOD,
+        level: 80,
+    }, {
+        name: PROGRESS_LEVELS.STRESS,
+        level: 30,
+    }],
+    iconSrc: "phase_3.jpg",
 }, {
     name: "Late Catabolic",
     startHour: 12,
-    hungerLevel: 100,
-    healthBoost: 60,
-    mentalBoost: 10,
-    autophagyLevel: 0,
-    nicotineCraving: 100,
-    nicotineInBlood: 70,
-    irritabilityLevel: 80,
-    iconPng: "late_catabolic_phase.png",
+    progressLevels: [{
+        name: PROGRESS_LEVELS.HUNGER,
+        level: 100,
+    }, {
+        name: PROGRESS_LEVELS.AUTOPHAGY,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.HEALTH,
+        level: 60,
+    }, {
+        name: PROGRESS_LEVELS.FOCUS,
+        level: 10,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_CRAVING,
+        level: 100,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_IN_BLOOD,
+        level: 70,
+    }, {
+        name: PROGRESS_LEVELS.STRESS,
+        level: 80,
+    }],
+    iconSrc: "phase_4.jpg",
 }, {
     name: "Ketosis",
     startHour: 16,
-    hungerLevel: 100,
-    healthBoost: 60,
-    mentalBoost: 5,
-    autophagyLevel: 0,
-    nicotineCraving: 80,
-    nicotineInBlood: 60,
-    irritabilityLevel: 70,
-    iconPng: "ketosis_phase.png",
+    progressLevels: [{
+        name: PROGRESS_LEVELS.HUNGER,
+        level: 100,
+    }, {
+        name: PROGRESS_LEVELS.AUTOPHAGY,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.HEALTH,
+        level: 60,
+    }, {
+        name: PROGRESS_LEVELS.FOCUS,
+        level: 5,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_CRAVING,
+        level: 80,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_IN_BLOOD,
+        level: 60,
+    }, {
+        name: PROGRESS_LEVELS.STRESS,
+        level: 70,
+    }],
+    iconSrc: "phase_5.jpg",
 }, {
     name: "Early Autophagy",
     startHour: 20,
-    hungerLevel: 70,
-    healthBoost: 60,
-    mentalBoost: 30,
-    autophagyLevel: 20,
-    nicotineCraving: 50,
-    nicotineInBlood: 50,
-    irritabilityLevel: 30,
-    iconPng: "early_autophagic_phase.png",
+    progressLevels: [{
+        name: PROGRESS_LEVELS.HUNGER,
+        level: 70,
+    }, {
+        name: PROGRESS_LEVELS.AUTOPHAGY,
+        level: 20,
+    }, {
+        name: PROGRESS_LEVELS.HEALTH,
+        level: 60,
+    }, {
+        name: PROGRESS_LEVELS.FOCUS,
+        level: 30,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_CRAVING,
+        level: 50,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_IN_BLOOD,
+        level: 50,
+    }, {
+        name: PROGRESS_LEVELS.STRESS,
+        level: 30,
+    }],
+    iconSrc: "phase_6.jpg",
 }, {
     name: "Autophagy",
     startHour: 24,
-    hungerLevel: 40,
-    healthBoost: 80,
-    mentalBoost: 50,
-    autophagyLevel: 60,
-    nicotineCraving: 30,
-    nicotineInBlood: 40,
-    irritabilityLevel: 20,
-    iconPng: "autophagic_phase.png",
+    progressLevels: [{
+        name: PROGRESS_LEVELS.HUNGER,
+        level: 40,
+    }, {
+        name: PROGRESS_LEVELS.AUTOPHAGY,
+        level: 60,
+    }, {
+        name: PROGRESS_LEVELS.HEALTH,
+        level: 80,
+    }, {
+        name: PROGRESS_LEVELS.FOCUS,
+        level: 50,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_CRAVING,
+        level: 30,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_IN_BLOOD,
+        level: 40,
+    }, {
+        name: PROGRESS_LEVELS.STRESS,
+        level: 20,
+    }],
+    iconSrc: "phase_7.jpg",
 }, {
     name: "Peak Autophagy",
     startHour: 28,
-    hungerLevel: 10,
-    healthBoost: 100,
-    mentalBoost: 100,
-    autophagyLevel: 80,
-    nicotineCraving: 20,
-    nicotineInBlood: 30,
-    irritabilityLevel: 0,
-    iconPng: "peak_phase.png",
+    progressLevels: [{
+        name: PROGRESS_LEVELS.HUNGER,
+        level: 10,
+    }, {
+        name: PROGRESS_LEVELS.AUTOPHAGY,
+        level: 80,
+    }, {
+        name: PROGRESS_LEVELS.HEALTH,
+        level: 100,
+    }, {
+        name: PROGRESS_LEVELS.FOCUS,
+        level: 100,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_CRAVING,
+        level: 20,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_IN_BLOOD,
+        level: 30,
+    }, {
+        name: PROGRESS_LEVELS.STRESS,
+        level: 0,
+    }],
+    iconSrc: "phase_8.jpg",
 }, {
     name: "Starvation",
     startHour: 72,
-    hungerLevel: 100,
-    healthBoost: 10,
-    mentalBoost: 100,
-    autophagyLevel: 100,
-    nicotineCraving: 0,
-    nicotineInBlood: 0,
-    irritabilityLevel: 0,
-    iconPng: "starvation_phase.png",
+    progressLevels: [{
+        name: PROGRESS_LEVELS.HUNGER,
+        level: 100,
+    }, {
+        name: PROGRESS_LEVELS.AUTOPHAGY,
+        level: 100,
+    }, {
+        name: PROGRESS_LEVELS.HEALTH,
+        level: 10,
+    }, {
+        name: PROGRESS_LEVELS.FOCUS,
+        level: 100,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_CRAVING,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_IN_BLOOD,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.STRESS,
+        level: 0,
+    }],
+    iconSrc: "stress.png",
 }, {
     name: "Dangerous",
     startHour: 100,
-    hungerLevel: 100,
-    healthBoost: 0,
-    mentalBoost: 0,
-    autophagyLevel: 100,
-    nicotineCraving: 0,
-    nicotineInBlood: 0,
-    irritabilityLevel: 0,
-    iconPng: "irritability.png",
+    progressLevels: [{
+        name: PROGRESS_LEVELS.HUNGER,
+        level: 100,
+    }, {
+        name: PROGRESS_LEVELS.AUTOPHAGY,
+        level: 100,
+    }, {
+        name: PROGRESS_LEVELS.HEALTH,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.FOCUS,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_CRAVING,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_IN_BLOOD,
+        level: 100,
+    }, {
+        name: PROGRESS_LEVELS.STRESS,
+        level: 0,
+    }],
+    iconSrc: "stress.png",
 }, {
     name: "Dangerous",
     startHour: 1000,
-    hungerLevel: 100,
-    healthBoost: 0,
-    mentalBoost: 0,
-    autophagyLevel: 100,
-    nicotineCraving: 0,
-    nicotineInBlood: 0,
-    irritabilityLevel: 0,
-    iconPng: "irritability.png",
+    progressLevels: [{
+        name: PROGRESS_LEVELS.HUNGER,
+        level: 100,
+    }, {
+        name: PROGRESS_LEVELS.AUTOPHAGY,
+        level: 100,
+    }, {
+        name: PROGRESS_LEVELS.HEALTH,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.FOCUS,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_CRAVING,
+        level: 0,
+    }, {
+        name: PROGRESS_LEVELS.NICOTINE_IN_BLOOD,
+        level: 100,
+    }, {
+        name: PROGRESS_LEVELS.STRESS,
+        level: 0,
+    }],
+    iconSrc: "stress.png",
 }];
 
 export default PHASES;

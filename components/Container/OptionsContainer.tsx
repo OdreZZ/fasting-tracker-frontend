@@ -17,8 +17,7 @@ export default function OptionsContainer() {
     const {
         startDate,
         endDate,
-        showFoodStats,
-        showTobaccoStats,
+        statsToShow,
         setStartDate,
         setEndDate,
         setAreOptionsShown,
@@ -73,8 +72,8 @@ export default function OptionsContainer() {
 
     const updateSettings = ({ showFood, showTobacco }: { showFood?: boolean, showTobacco?: boolean }) => {
         const settings = {
-            showFoodStats: showFood !== undefined ? showFood : showFoodStats,
-            showTobaccoStats: showTobacco !== undefined ? showTobacco : showTobaccoStats,
+            showFoodStats: showFood !== undefined ? showFood : statsToShow.showFoodStats,
+            showTobaccoStats: showTobacco !== undefined ? showTobacco : statsToShow.showTobaccoStats,
         };
 
         if (!settings.showFoodStats && !settings.showTobaccoStats) {
@@ -90,16 +89,16 @@ export default function OptionsContainer() {
         <div className={styles.checkboxContainer}>
             <Checkbox
                 label="Food Fast"
-                isChecked={showFoodStats}
-                onChange={() => updateSettings({ showFood: !showFoodStats })}
-                iconPng="food_fast.png"
+                isChecked={statsToShow.showFoodStats}
+                onChange={() => updateSettings({ showFood: !statsToShow.showFoodStats })}
+                iconSrc="food_fast.jpg"
             />
 
             <Checkbox
                 label="Tobacco Fast"
-                isChecked={showTobaccoStats}
-                onChange={() => updateSettings({ showTobacco: !showTobaccoStats })}
-                iconPng="nicotine_craving.png"
+                isChecked={statsToShow.showTobaccoStats}
+                onChange={() => updateSettings({ showTobacco: !statsToShow.showTobaccoStats })}
+                iconSrc="tobacco_fast.jpg"
             />
         </div>
 
@@ -107,14 +106,14 @@ export default function OptionsContainer() {
             <div className={styles.datePickerContainer}>
                 <CustomDatePicker
                     text="Start Date"
-                    icon="start_date.png"
+                    icon="start_date.jpg"
                     date={startDate}
                     onDateChange={updateStartDate}
                 />
 
                 <CustomDatePicker
                     text="End Date"
-                    icon="end_date.png"
+                    icon="end_date.jpg"
                     date={endDate}
                     onDateChange={updateEndDate}
                 />
@@ -123,7 +122,7 @@ export default function OptionsContainer() {
 
         <div className={styles.actionsContainer}>
             <button onClick={onResetDates}>
-                <ImageIcon src="reset.png" />
+                <ImageIcon src="reset.jpg" />
 
                 <div>
                     Reset Dates

@@ -6,12 +6,38 @@ export const PROGRESS_VIEW = {
     PERC_PASSED: "PERC_PASSED",
 };
 
+export const PROGRESS_LEVELS = {
+    HUNGER: "HUNGER",
+    AUTOPHAGY: "AUTOPHAGY",
+    HEALTH: "HEALTH",
+    FOCUS: "FOCUS",
+    NICOTINE_CRAVING: "NICOTINE_CRAVING",
+    NICOTINE_IN_BLOOD: "NICOTINE_IN_BLOOD",
+    STRESS: "STRESS",
+};
+
+export const FOOD_FAST_INDICATORS = [
+    PROGRESS_LEVELS.HUNGER,
+    PROGRESS_LEVELS.AUTOPHAGY,
+    PROGRESS_LEVELS.HEALTH,
+    PROGRESS_LEVELS.FOCUS,
+    PROGRESS_LEVELS.STRESS,
+];
+
+export const TOBACCO_FAST_INDICATORS = [
+    PROGRESS_LEVELS.NICOTINE_CRAVING,
+    PROGRESS_LEVELS.NICOTINE_IN_BLOOD,
+    PROGRESS_LEVELS.HEALTH,
+    PROGRESS_LEVELS.FOCUS,
+    PROGRESS_LEVELS.STRESS,
+];
+
 export const useZustandStore = create<ZustandState>((set, get) => {
     return {
         view: PROGRESS_VIEW.TIME_PASSED,
-        details: {
+        phaseDetails: {
             name: "",
-            iconPng: "",
+            iconSrc: "",
         },
         startDate: null,
         endDate: null,
@@ -21,34 +47,65 @@ export const useZustandStore = create<ZustandState>((set, get) => {
             hours: 0,
         },
         percentageDone: 0,
-        hungerLevel: 0,
-        autophagyLevel: 0,
-        healthBoost: 0,
-        mentalBoost: 0,
-        nicotineCraving: 0,
-        nicotineInBlood: 0,
-        irritabilityLevel: 0,
+
+        progressLevels: [{
+            name: PROGRESS_LEVELS.HUNGER,
+            level: 0,
+            isShown: true,
+        }, {
+            name: PROGRESS_LEVELS.AUTOPHAGY,
+            level: 0,
+            isShown: true,
+        }, {
+            name: PROGRESS_LEVELS.HEALTH,
+            level: 0,
+            isShown: true,
+        }, {
+            name: PROGRESS_LEVELS.FOCUS,
+            level: 0,
+            isShown: true,
+        }, {
+            name: PROGRESS_LEVELS.NICOTINE_CRAVING,
+            level: 0,
+            isShown: true,
+        }, {
+            name: PROGRESS_LEVELS.NICOTINE_IN_BLOOD,
+            level: 0,
+            isShown: true,
+        }, {
+            name: PROGRESS_LEVELS.STRESS,
+            level: 0,
+            isShown: true,
+        }],
+        
         areColonsShown: true,
         areOptionsShown: false,
-        showFoodStats: true,
-        showTobaccoStats: true,
+        statsToShow: {
+            showFoodStats: true,
+            showTobaccoStats: true,
+            visibleStats: [ ...FOOD_FAST_INDICATORS ],
+        },
 
         setView: (view) => set((state) => ({ ...state, view })),
-        setDetails: (details) => set((state) => ({ ...state, details })),
+        setPhaseDetails: (phaseDetails) => set((state) => ({ ...state, phaseDetails })),
         setStartDate: (startDate) => set((state) => ({ ...state, startDate })),
         setEndDate: (endDate) => set((state) => ({ ...state, endDate })),
         setTimeDiff: (timeDiff) => set((state) => ({ ...state, timeDiff })),
         setPercentageDone: (percentageDone) => set((state) => ({ ...state, percentageDone })),
-        setHungerLevel: (hungerLevel) => set((state) => ({ ...state, hungerLevel })),
-        setAuthophagyLevel: (authophagyLevel) => set((state) => ({ ...state, authophagyLevel })),
-        setHealthBoost: (healthBoost) => set((state) => ({ ...state, healthBoost })),
-        setMentalBoost: (mentalBoost) => set((state) => ({ ...state, mentalBoost })),
-        setNicotineCraving: (nicotineCraving) => set((state) => ({ ...state, nicotineCraving })),
-        setNicotineInBlood: (nicotineInBlood) => set((state) => ({ ...state, nicotineInBlood })),
-        setIrritabilityLevel: (irritabilityLevel) => set((state) => ({ ...state, irritabilityLevel })),
+
+        setProgressLevels: (progressLevels) => set((state) => ({ ...state, progressLevels: [ ...progressLevels ] })),
+
         setAreOptionsShown: (areOptionsShown) => set((state) => ({ ...state, areOptionsShown })),
-        setShowFoodStats: (showFoodStats) => set((state) => ({ ...state, showFoodStats })),
-        setShowTobaccoStats: (showTobaccoStats) => set((state) => ({ ...state, showTobaccoStats })),
+    
+        setShowFoodStats: (showFoodStats) => set((state) => ({ 
+            ...state, 
+            statsToShow: { ...state.statsToShow, showFoodStats, visibleStats: populateVisibleStats(showFoodStats, state.statsToShow.showTobaccoStats) },
+        })),
+        setShowTobaccoStats: (showTobaccoStats) => set((state) => ({ 
+            ...state, 
+            statsToShow: { ...state.statsToShow, showTobaccoStats, visibleStats: populateVisibleStats(state.statsToShow.showFoodStats, showTobaccoStats) },
+        })),
+
         toggleColonsShown: () => set((state) => ({ ...state, areColonsShown: !state.areColonsShown })),
     }
 });
@@ -56,38 +113,41 @@ export const useZustandStore = create<ZustandState>((set, get) => {
 export const useZustandSelector = (state: ZustandState) => {
     return {
         view: state.view,
-        details: state.details,
+        phaseDetails: state.phaseDetails,
         startDate: state.startDate,
         endDate: state.endDate,
         timeDiff: state.timeDiff,
         percentageDone: state.percentageDone,
-        hungerLevel: state.hungerLevel,
-        autophagyLevel: state.autophagyLevel,
-        healthBoost: state.healthBoost,
-        mentalBoost: state.mentalBoost,
-        nicotineCraving: state.nicotineCraving,
-        nicotineInBlood: state.nicotineInBlood,
-        irritabilityLevel: state.irritabilityLevel,
+
+        progressLevels: state.progressLevels,
+
         areColonsShown: state.areColonsShown,
         areOptionsShown: state.areOptionsShown,
-        showFoodStats: state.showFoodStats,
-        showTobaccoStats: state.showTobaccoStats,
+        statsToShow: state.statsToShow,
         setView: state.setView,
-        setDetails: state.setDetails,
+        setPhaseDetails: state.setPhaseDetails,
         setStartDate: state.setStartDate,
         setEndDate: state.setEndDate,
         setTimeDiff: state.setTimeDiff,
         setPercentageDone: state.setPercentageDone,
-        setHungerLevel: state.setHungerLevel,
-        setAuthophagyLevel: state.setAuthophagyLevel,
-        setHealthBoost: state.setHealthBoost,
-        setMentalBoost: state.setMentalBoost,
-        setNicotineCraving: state.setNicotineCraving,
-        setNicotineInBlood: state.setNicotineInBlood,
-        setIrritabilityLevel: state.setIrritabilityLevel,
+
+        setProgressLevels: state.setProgressLevels,
+
         setAreOptionsShown: state.setAreOptionsShown,
         setShowFoodStats: state.setShowFoodStats,
         setShowTobaccoStats: state.setShowTobaccoStats,
         toggleColonsShown: state.toggleColonsShown,
     }
 };
+
+function populateVisibleStats(showFoodStats: boolean, showTobaccoStats: boolean) {
+    const visibleStats: string[] = [];
+    if (showFoodStats) {
+        visibleStats.push(...FOOD_FAST_INDICATORS);
+    }
+    if (showTobaccoStats) {
+        visibleStats.push(...TOBACCO_FAST_INDICATORS);
+    }
+
+    return visibleStats;
+}

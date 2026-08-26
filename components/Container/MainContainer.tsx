@@ -6,6 +6,7 @@ import styles from "../../styles/components/Container/MainContainer.module.css";
 import { useTranslation } from "react-i18next";
 import localFont from "next/font/local";
 import classNames from "classnames";
+import AppHeader from "../Common/AppHeader";
 
 const ffFont = localFont({ src: "../../fonts/FFXIVAppIcons.ttf" });
 
@@ -27,6 +28,7 @@ export default function MainContainer({
         </Head>
 
         <main className={styles.mainContainer}>
+            <AppHeader />
             {children}
         </main>
     </div>

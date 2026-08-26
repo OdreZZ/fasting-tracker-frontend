@@ -6,15 +6,15 @@ interface CheckboxProps {
     label: string,
     isChecked: boolean,
     onChange: () => void,
-    iconPng: string,
+    iconSrc: string,
 }
 
-const Checkbox = ({ label, isChecked, onChange, iconPng }: CheckboxProps) => {
+const Checkbox = ({ label, isChecked, onChange, iconSrc }: CheckboxProps) => {
     return <div className={classNames(styles.checkbox, {
         [styles.active]: isChecked,
     })} onClick={onChange}>
         <div className={styles.checkboxTitle}>
-            <ImageIcon src={iconPng} />
+            <ImageIcon src={iconSrc} />
             <div>{label}</div>
         </div>
 

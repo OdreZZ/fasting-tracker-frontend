@@ -1,36 +1,28 @@
 export interface ZustandState {
     view: string,
-    details: AttributeDetails,
+    phaseDetails: AttributeDetails,
     startDate: Date | null,
     endDate: Date | null,
     timeDiff: TimeDifference,
     percentageDone: number,
-    hungerLevel: number,
-    autophagyLevel: number,
-    healthBoost: number,
-    mentalBoost: number,
-    nicotineCraving: number,
-    nicotineInBlood: number,
-    irritabilityLevel: number,
+
+    progressLevels: ProgressLevel[],
+
     areColonsShown: boolean,
     areOptionsShown: boolean,
-    showFoodStats: boolean,
-    showTobaccoStats: boolean,
+    statsToShow: StatsToShow,
 
     setView: (view: string) => void,
-    setDetails: (details: AttributeDetails) => void,
+    setPhaseDetails: (phaseDetails: AttributeDetails) => void,
     setStartDate: (startDate: Date) => void,
     setEndDate: (endDate: Date) => void,
     setTimeDiff: (timeDiff: TimeDifference) => void,
     setPercentageDone: (percentageDone: number) => void,
-    setHungerLevel: (hungerLevel: number) => void,
-    setAuthophagyLevel: (authophagyLevel: number) => void,
-    setHealthBoost: (healthBoost: number) => void,
-    setMentalBoost: (mentalBoost: number) => void,
-    setNicotineCraving: (nicotineCraving: number) => void,
-    setNicotineInBlood: (nicotineInBlood: number) => void,
-    setIrritabilityLevel: (irritabilityLevel: number) => void,
+
+    setProgressLevels: (progressLevels: ProgressLevel[]) => void,
+
     setAreOptionsShown: (areOptionsShown: boolean) => void,
+
     setShowFoodStats: (showFoodStats: boolean) => void,
     setShowTobaccoStats: (showTobaccoStats: boolean) => void,
     toggleColonsShown: () => void,
@@ -38,11 +30,22 @@ export interface ZustandState {
 
 export interface AttributeDetails {
     name: string,
-    iconPng: string,
+    iconSrc: string,
 }
 
 export interface TimeDifference {
     hours: number,
     minutes: number,
     seconds: number,
+}
+
+export interface ProgressLevel {
+    name: string,
+    level: number,
+}
+
+export interface StatsToShow {
+    showFoodStats: boolean,
+    showTobaccoStats: boolean,
+    visibleStats: string[],
 }
