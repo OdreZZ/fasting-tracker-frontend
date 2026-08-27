@@ -58,3 +58,14 @@
     height: 60px;
     color: white;
 }
+
+@media (max-width: 600px) {
+    .optionsContainer {
+        width: 90%;
+    }
+
+    .datePickerContainer input {
+        font-size: 1rem;
+        letter-spacing: 2px;
+    }
+}

@@ -10,9 +10,12 @@ import {
 } from "@/utils/local-storage";
 import { useRouter } from "next/router";
 import ImageIcon from "../Common/ImageIcon";
+import { useState } from "react";
 
 export default function OptionsContainer() {
     const router = useRouter();
+
+    const [isDragging, setIsDragging] = useState(false);
 
     const {
         startDate,
@@ -54,6 +57,10 @@ export default function OptionsContainer() {
     }
 
     const onResetDates = () => {
+        if (isDragging) {
+            return;
+        }
+
         const dateStart = new Date();
         setStartDate(dateStart);
         updateFastStartingDate(dateStart);
@@ -85,7 +92,10 @@ export default function OptionsContainer() {
         setShowTobaccoStats(settings.showTobaccoStats);
     }
 
-    return <div className={styles.optionsContainer}>
+    return <div className={styles.optionsContainer} 
+        onDragStart={() => setIsDragging(true)}
+        onDragEnd={() => setIsDragging(false)}
+    >
         <div className={styles.checkboxContainer}>
             <Checkbox
                 label="Food Fast"

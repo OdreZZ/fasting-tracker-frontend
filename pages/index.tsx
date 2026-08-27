@@ -2,6 +2,9 @@ import styles from "../styles/pages/Homepage.module.css";
 import { useEffect, useState } from "react";
 import { useZustandSelector, useZustandStore } from "@/stores/ZustandStore";
 import { useShallow } from "zustand/shallow";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import { getProgressData, getTimeDiff } from "@/utils/date-calculations";
 import { getCachedSettings, getFastGoalDate, getFastStartingDate } from "@/utils/local-storage";
@@ -97,10 +100,26 @@ export default function Homepage({ start, end, preventCache }: HomepageProps) {
         return null;
     }
 
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    };
+
     return <div className={styles.homepage}>
         <TimePassedContainer />
 
-        {areOptionsShown ? <OptionsContainer /> : <ProgressBarsContainer />}
+
+        <Slider {...settings}>
+            <div className={styles.slideContainer}>
+                <OptionsContainer />
+            </div>
+            <div className={styles.slideContainer}>
+                <ProgressBarsContainer />
+            </div>
+        </Slider>
     </div>;
 }
 
